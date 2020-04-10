@@ -108,6 +108,5 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
                 finish();
                 break;
         }
-
     }
 }

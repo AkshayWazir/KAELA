@@ -1,13 +1,18 @@
 package org.wazir.build.kaela;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,13 +23,16 @@ import org.wazir.build.kaela.Fragments.IntroScreenFrag;
 import org.wazir.build.kaela.Fragments.LoginFragment;
 import org.wazir.build.kaela.Interfaces.FragInteract;
 
+import java.io.IOException;
+
 public class IntroductionActivity extends AppCompatActivity implements FragInteract {
     FrameLayout fragContainer;
-
+    Dialog imageUploadDialog;
     IntroScreenFrag frag;
     LoginFragment fragLog;
     FragmentChooseSignup fragSign;
     String LOGIN_URL = "";
+    Bitmap bitmap;
 
 
     @Override
@@ -91,10 +99,8 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
     }
 
     @Override
-    public void registerComplete() {
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        int userType = sharedPref.getInt("TYPE", -1);
-        switch (userType) {
+    public void registerComplete(int direc) {
+        switch (direc) {
             case (0):
                 startActivity(new Intent(this, StudentMainScreen.class));
                 finish();
@@ -109,4 +115,10 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
                 break;
         }
     }
+
+    @Override
+    public void regisTeacher() {
+
+    }
+
 }

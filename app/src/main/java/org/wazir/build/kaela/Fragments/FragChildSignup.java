@@ -29,12 +29,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.wazir.build.kaela.PublicLinks.STUDENT_URL_REGISTER;
+
 public class FragChildSignup extends Fragment {
     private FragInteract interact;
     private ProgressBar bar;
     private View view;
     private Context ctx;
-    private String STU_SIGNUP_URL = "https://pedir.in/register_user/register.php";
 
     public void setInteract(FragInteract interact) {
         this.interact = interact;
@@ -103,7 +104,8 @@ public class FragChildSignup extends Fragment {
     }
 
     private void registerStudent(final String[] object) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, STU_SIGNUP_URL,
+        updateUI(true);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, STUDENT_URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -116,19 +118,20 @@ public class FragChildSignup extends Fragment {
                                 editor.putString("NAME", object[0]);
                                 editor.putString("EMAIL", object[1]);
                                 editor.putInt("TYPE", 0);
-                                editor.apply();
-                                interact.registerComplete();
+                                editor.commit();
+                                interact.registerComplete(0);
                                 Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(ctx, "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "SignUp Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "SignUp Failed : " + error.getStackTrace(), Toast.LENGTH_LONG).show();
+                        updateUI(false);
                     }
                 }) {
             @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.LoginFragment">
+    tools:context="in.indilabz.student_helper.kaela.Fragments.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/cabin"
             android:text="Forgot  Password ?"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +81,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
                 android:hint="Email"
-                android:inputType="textEmailAddress" />
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="6sp"
+                android:inputType="textEmailAddress"
+                android:textColor="#000" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -92,14 +97,31 @@
             android:theme="@style/TextInputLayoutAppearance"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#000">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin"
                 android:hint="Password"
-                android:inputType="textPassword" />
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="6sp"
+                android:inputType="textPassword"
+                android:textColor="#000" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/id_login_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

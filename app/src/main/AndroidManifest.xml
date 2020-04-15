@@ -20,6 +20,7 @@
             android:label="Teacher's Panel" />
         <activity
             android:name="in.indilabz.student_helper.kaela.StudentMainScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="Student Panel" />
         <activity
             android:name="in.indilabz.student_helper.kaela.IntroductionActivity"

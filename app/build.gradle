@@ -40,5 +40,6 @@ dependencies {
     implementation "com.google.android.material:material:1.2.0-alpha05"
     // volley library
     implementation 'com.android.volley:volley:1.1.1'
-
+    // circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

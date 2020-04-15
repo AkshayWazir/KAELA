@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -21,18 +22,19 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
-import in.indilabz.student_helper.kaela.R;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
 import in.indilabz.student_helper.kaela.PublicLinks;
+import in.indilabz.student_helper.kaela.R;
 
 public class FragTeacherSignup extends Fragment {
     private FragInteract interact;
     private View view;
+    private ProgressBar bar;
 
     public void setInteract(FragInteract interact) {
         this.interact = interact;
@@ -41,7 +43,7 @@ public class FragTeacherSignup extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_frag_teacher_signup, container, false);
-
+        bar = view.findViewById(R.id.progressBar3);
         view.findViewById(R.id.imageView8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +56,7 @@ public class FragTeacherSignup extends Fragment {
             public void onClick(View view) {
                 if (validateContent()) {
                     String[] result = getResultantString();
+                    updateUi(true);
                     registerUser(result);
                 } else {
                     Toast.makeText(getContext(), "Some Fields are empty", Toast.LENGTH_SHORT).show();
@@ -61,6 +64,14 @@ public class FragTeacherSignup extends Fragment {
             }
         });
         return view;
+    }
+
+    void updateUi(boolean state) {
+        if (state) {
+            bar.setVisibility(View.VISIBLE);
+        } else {
+            bar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private String[] getResultantString() {
@@ -108,9 +119,11 @@ public class FragTeacherSignup extends Fragment {
                                 interact.registerComplete(1);
                                 Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
                             } else {
+                                updateUi(false);
                                 Toast.makeText(getContext(), "Failed to write Data", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
+                            updateUi(false);
                             e.printStackTrace();
                         }
                     }
@@ -118,6 +131,7 @@ public class FragTeacherSignup extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        updateUi(false);
                         Toast.makeText(getContext(), "SignUp Failed :" + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {

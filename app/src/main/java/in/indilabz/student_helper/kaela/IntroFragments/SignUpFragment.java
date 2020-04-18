@@ -1,4 +1,4 @@
-package in.indilabz.student_helper.kaela.Fragments;
+package in.indilabz.student_helper.kaela.IntroFragments;
 
 import android.os.Bundle;
 

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.wazir.build.kaela"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -34,12 +34,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
     // viewpager dependency
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
     // material design dependency
     implementation "com.google.android.material:material:1.2.0-alpha05"
+
     // volley library
     implementation 'com.android.volley:volley:1.1.1'
+
     // circular Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // bubble navigation bar
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 }

@@ -9,14 +9,12 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import in.indilabz.student_helper.kaela.Fragments.FragChildSignup;
-import in.indilabz.student_helper.kaela.Fragments.FragTeacherSignup;
-import in.indilabz.student_helper.kaela.Fragments.FragmentChooseSignup;
-import in.indilabz.student_helper.kaela.Fragments.IntroScreenFrag;
-import in.indilabz.student_helper.kaela.Fragments.LoginFragment;
+import in.indilabz.student_helper.kaela.IntroFragments.FragChildSignup;
+import in.indilabz.student_helper.kaela.IntroFragments.FragTeacherSignup;
+import in.indilabz.student_helper.kaela.IntroFragments.FragmentChooseSignup;
+import in.indilabz.student_helper.kaela.IntroFragments.IntroScreenFrag;
+import in.indilabz.student_helper.kaela.IntroFragments.LoginFragment;
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
-
-import in.indilabz.student_helper.kaela.R;
 
 public class IntroductionActivity extends AppCompatActivity implements FragInteract {
     FrameLayout fragContainer;

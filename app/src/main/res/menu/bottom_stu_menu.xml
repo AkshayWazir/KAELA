@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/id_bnb_ask"
-        android:icon="@drawable/ic_question"
+        android:id="@+id/id_logout"
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="always"
         android:title="ASK" />
-    <item
-        android:id="@+id/id_bnb_group"
-        android:icon="@drawable/ic_group"
-        android:title="GROUPS" />
-    <item
-        android:id="@+id/id_bnb_chat"
-        android:icon="@drawable/ic_chat"
-        android:title="CHAT" />
 </menu>

@@ -15,7 +15,7 @@
         android:fontFamily="sans-serif-light"
         android:text="Physics study group"
         android:textColor="#000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

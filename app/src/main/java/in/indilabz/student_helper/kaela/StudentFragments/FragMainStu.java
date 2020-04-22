@@ -12,13 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.indilabz.student_helper.kaela.Adapters.StudentAdapter;
+import in.indilabz.student_helper.kaela.Interfaces.StuFraInt;
 import in.indilabz.student_helper.kaela.ModelObjects.ClassObjectStudents;
-import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.R;
 
 
 public class FragMainStu extends Fragment {
     private View view;
+    private StuFraInt interact;
+
+    public void setInteract(StuFraInt interact) {
+        this.interact = interact;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,8 +35,10 @@ public class FragMainStu extends Fragment {
     void rcViewSetup() {
         RecyclerView rcView = view.findViewById(R.id.id_stu_main_rcview);
         rcView.setHasFixedSize(true);
-        rcView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        rcView.setAdapter(new StudentAdapter(getContext(), getDataForDisplay()));
+        rcView.setLayoutManager(new LinearLayoutManager(getContext()));
+        StudentAdapter adapter = new StudentAdapter(getContext(), getDataForDisplay());
+        adapter.setInteract(interact);
+        rcView.setAdapter(adapter);
     }
 
     private ArrayList<ClassObjectStudents> getDataForDisplay() {
@@ -40,16 +47,11 @@ public class FragMainStu extends Fragment {
         obj.setTitle("5");
         String[] subs = {"Hindi", "English", "Maths", "SST", "Physical Education"};
         obj.setSubs(subs);
-        TeacherObject[] objects = {
-                new TeacherObject("", "Rancho", "Teacher", "4"),
-                new TeacherObject("", "Pappu", "Teacher", "4"),
-                new TeacherObject("", "Jethalal", "Teacher", "4"),
-                new TeacherObject("", "Tappu k papa", "Teacher", "4"),
-                new TeacherObject("", "Salmon Khoon", "Teacher", "4"),
-                new TeacherObject("", "Bhiide", "Teacher", "4"),
-                new TeacherObject("", "Rancho", "Teacher", "4")
-        };
-        obj.setTeachers(objects);
+        container.add(obj);
+        obj.setTitle("6");
+        obj.setSubs(subs);
+        container.add(obj);
+        container.add(obj);
         container.add(obj);
         container.add(obj);
         container.add(obj);

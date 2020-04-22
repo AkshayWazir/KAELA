@@ -12,20 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".StudentActivities.AskActivityQuestion" />
+        <activity android:name=".StudentActivities.ShowTeachers"
+            android:label="Teachers"/>
         <activity
-            android:name="in.indilabz.student_helper.kaela.AdminMainScreen"
+            android:name=".AdminMainScreen"
             android:label="Admin Panel" />
         <activity
-            android:name="in.indilabz.student_helper.kaela.TeacherMainScreen"
-            android:label="Teacher's Panel" />
+            android:name=".TeacherMainScreen"
+            android:label="Teacher&apos;s Panel" />
         <activity
-            android:name="in.indilabz.student_helper.kaela.StudentMainScreen"
+            android:name=".StudentMainScreen"
             android:label="Student Panel" />
         <activity
-            android:name="in.indilabz.student_helper.kaela.IntroductionActivity"
+            android:name=".IntroductionActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name="in.indilabz.student_helper.kaela.SplashScreen"
+            android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

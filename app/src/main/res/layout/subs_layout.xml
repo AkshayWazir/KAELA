@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_subs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="20sp"
         app:cardElevation="3sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8sp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif-light"
             android:text="Physics"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 

@@ -8,20 +8,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
+import in.indilabz.student_helper.kaela.Interfaces.AskQuestion;
 import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.R;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachViewHolder> {
     private Context ctx;
     private TeacherObject[] objects;
+    private AskQuestion question;
 
-    TeacherAdapter(Context ctx, TeacherObject[] objects) {
+    public TeacherAdapter(Context ctx, TeacherObject[] objects) {
         this.ctx = ctx;
         this.objects = objects;
+    }
+
+    public void setQuestion(AskQuestion question) {
+        this.question = question;
     }
 
     @NonNull
@@ -32,7 +37,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull teachViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final teachViewHolder holder, final int position) {
         holder.name.setText(objects[position].getName());
         holder.title.setText(objects[position].getDesignation());
         switch (Integer.parseInt(objects[position].getRating())) {
@@ -55,6 +60,27 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
                 holder.star5.setImageResource(R.drawable.ic_star_empty);
                 break;
         }
+        holder.clickable
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!objects[position].isSelected()) {
+                            question.selectTeacher(objects[position].getId());
+                            holder.check.setImageResource(R.drawable.tick);
+                            objects[position].setSelected(true);
+                        } else {
+                            question.removeTeacher(objects[position].getId());
+                            holder.check.setImageResource(R.drawable.hollo_cirle);
+                            objects[position].setSelected(false);
+                        }
+                    }
+                });
+        holder.showProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 4/22/2020 show profile
+            }
+        });
     }
 
     @Override
@@ -63,8 +89,9 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
     }
 
     static class teachViewHolder extends RecyclerView.ViewHolder {
+        ConstraintLayout clickable, showProfile;
         ImageView profPic;
-        ImageView star1, star2, star3, star4, star5;
+        ImageView star1, star2, star3, star4, star5, check;
         TextView name, title;
 
         teachViewHolder(@NonNull View itemView) {
@@ -77,6 +104,9 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
             star5 = itemView.findViewById(R.id.imageView15);
             name = itemView.findViewById(R.id.textView17);
             title = itemView.findViewById(R.id.textView18);
+            clickable = itemView.findViewById(R.id.teacher_container);
+            check = itemView.findViewById(R.id.imageView20);
+            showProfile = itemView.findViewById(R.id.id_showprof);
         }
     }
 }

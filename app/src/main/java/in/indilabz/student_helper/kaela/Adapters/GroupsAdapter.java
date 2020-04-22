@@ -1,5 +1,7 @@
 package in.indilabz.student_helper.kaela.Adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,6 +17,11 @@ import in.indilabz.student_helper.kaela.R;
 
 public class GroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<Object> objects;
+    private Context ctx;
+
+    public void setCtx(Context ctx) {
+        this.ctx = ctx;
+    }
 
     public void setObjects(ArrayList<Object> objects) {
         this.objects = objects;
@@ -35,11 +42,11 @@ public class GroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = View.inflate(parent.getContext(), R.layout.title_layout, parent);
-            return new TitleHandler(view);
+            View v = LayoutInflater.from(ctx).inflate(R.layout.title_layout, parent, false);
+            return new TitleHandler(v);
         } else {
-            View view = View.inflate(parent.getContext(), R.layout.group_pannel, parent);
-            return new GroupHandler(view);
+            View v = LayoutInflater.from(ctx).inflate(R.layout.group_pannel, parent, false);
+            return new GroupHandler(v);
         }
     }
 

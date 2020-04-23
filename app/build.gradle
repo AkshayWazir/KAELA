@@ -49,4 +49,7 @@ dependencies {
 
     // bubble navigation bar
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
+    // circular progress bar
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,18 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.indilabz.student_helper.kaela.Interfaces.AskQuestion;
 import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.R;
 
-public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachViewHolder> {
+public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachViewHolder> implements Filterable {
     private Context ctx;
-    private TeacherObject[] objects;
+    private ArrayList<TeacherObject> objects, allObjects;
     private AskQuestion question;
 
-    public TeacherAdapter(Context ctx, TeacherObject[] objects) {
+    public TeacherAdapter(Context ctx, ArrayList<TeacherObject> objects) {
         this.ctx = ctx;
         this.objects = objects;
+        this.allObjects = new ArrayList<>(objects);
     }
 
     public void setQuestion(AskQuestion question) {
@@ -38,9 +44,9 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
 
     @Override
     public void onBindViewHolder(@NonNull final teachViewHolder holder, final int position) {
-        holder.name.setText(objects[position].getName());
-        holder.title.setText(objects[position].getDesignation());
-        switch (Integer.parseInt(objects[position].getRating())) {
+        holder.name.setText(objects.get(position).getName());
+        holder.title.setText(objects.get(position).getDesignation());
+        switch (Integer.parseInt(objects.get(position).getRating())) {
             case (1):
                 holder.star2.setImageResource(R.drawable.ic_star_empty);
                 holder.star3.setImageResource(R.drawable.ic_star_empty);
@@ -64,14 +70,14 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (!objects[position].isSelected()) {
-                            question.selectTeacher(objects[position].getId());
+                        if (!objects.get(position).isSelected()) {
+                            question.selectTeacher(objects.get(position).getId());
                             holder.check.setImageResource(R.drawable.tick);
-                            objects[position].setSelected(true);
+                            objects.get(position).setSelected(true);
                         } else {
-                            question.removeTeacher(objects[position].getId());
+                            question.removeTeacher(objects.get(position).getId());
                             holder.check.setImageResource(R.drawable.hollo_cirle);
-                            objects[position].setSelected(false);
+                            objects.get(position).setSelected(false);
                         }
                     }
                 });
@@ -85,8 +91,40 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
 
     @Override
     public int getItemCount() {
-        return objects.length;
+        return objects.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<TeacherObject> filtered = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filtered.addAll(allObjects);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (TeacherObject item : allObjects) {
+                    if (item.getName().toLowerCase().trim().contains(filterPattern)) {
+                        filtered.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filtered;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            objects.clear();
+            objects.addAll((List<? extends TeacherObject>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     static class teachViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout clickable, showProfile;

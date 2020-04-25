@@ -12,7 +12,7 @@
     <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
         <item name="errorTextAppearance">@android:color/holo_red_dark</item>
         <item name="android:textColor">#000</item>
-        <item name="android:textColorHint">#000</item>
+        <item name="android:textColorHint">@color/textSubtitleColor</item>
         <item name="colorControlNormal">#000</item>
         <item name="colorControlActivated">#000</item>
         <item name="colorControlHighlight">#000</item>

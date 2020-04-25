@@ -64,7 +64,7 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
         objects.add(new TeacherObject("", "Ashwani Gupta", "Professor", "2"));
         objects.add(new TeacherObject("", "Topi Master", "Professor", "2"));
         return objects;
-}
+    }
 
     @Override
     public void selectTeacher(String teachId) {
@@ -78,6 +78,11 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
         if (teachId.length() == 0) {
             submit_btn.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void showProfile(String teachId) {
+        startActivity(new Intent(this, TeacherProfile.class));
     }
 
     @Override

@@ -84,7 +84,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
         holder.showProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 4/22/2020 show profile
+                question.showProfile(objects.get(position).getId());
             }
         });
     }

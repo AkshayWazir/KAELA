@@ -33,7 +33,36 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-
+        holder.StudentName.setText(objects.get(position).getStudentName());
+        holder.question.setText(objects.get(position).getQuestion());
+        holder.subject.setText(objects.get(position).getSubject());
+        switch (objects.get(position).getRating()){
+            case (1):
+                holder.st1.setImageResource(R.drawable.ic_star_filled);
+                break;
+            case (2):
+                holder.st1.setImageResource(R.drawable.ic_star_filled);
+                holder.st2.setImageResource(R.drawable.ic_star_filled);
+                break;
+            case (3):
+                holder.st1.setImageResource(R.drawable.ic_star_filled);
+                holder.st2.setImageResource(R.drawable.ic_star_filled);
+                holder.st3.setImageResource(R.drawable.ic_star_filled);
+                break;
+            case (4):
+                holder.st1.setImageResource(R.drawable.ic_star_filled);
+                holder.st2.setImageResource(R.drawable.ic_star_filled);
+                holder.st3.setImageResource(R.drawable.ic_star_filled);
+                holder.st4.setImageResource(R.drawable.ic_star_filled);
+                break;
+            case (5):
+                holder.st1.setImageResource(R.drawable.ic_star_filled);
+                holder.st2.setImageResource(R.drawable.ic_star_filled);
+                holder.st3.setImageResource(R.drawable.ic_star_filled);
+                holder.st4.setImageResource(R.drawable.ic_star_filled);
+                holder.st5.setImageResource(R.drawable.ic_star_filled);
+                break;
+        }
     }
 
     @Override
@@ -45,7 +74,7 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
         TextView StudentName, subject, question;
         ImageView st1, st2, st3, st4, st5;
 
-        public ReviewViewHolder(@NonNull View itemView) {
+        ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             StudentName = itemView.findViewById(R.id.textView39);
             question = itemView.findViewById(R.id.textView41);

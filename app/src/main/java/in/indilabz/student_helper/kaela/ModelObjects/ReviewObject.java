@@ -4,6 +4,9 @@ public class ReviewObject {
     private String StudentName, question, subject;
     private int rating;
 
+    public ReviewObject() {
+    }
+
     public ReviewObject(String studentName, String question, String subject, int rating) {
         StudentName = studentName;
         this.question = question;

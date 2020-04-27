@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +21,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
     private Context context;
     private ArrayList<ClassObjectStudents> objects;
     private StuFraInt interact;
+    private int[] teachCount;
 
     public void setInteract(StuFraInt interact) {
         this.interact = interact;
@@ -45,6 +44,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
         holder.title.setText(objects.get(position).getTitle());
         holder.rcView.setLayoutManager(new GridLayoutManager(context, 2));
         holder.rcView.setHasFixedSize(true);
+        if (teachCount != null) {
+            holder.teachersCount.setText(String.format("%s : Members", Integer.toString(teachCount[position])));
+        }
+        if (objects.get(position).getExtraSub() != null) {
+            holder.extraSub.setText(objects.get(position).getExtraSub());
+        }
         SubsAdapter adapter = new SubsAdapter(objects.get(position).getSubs(), context, objects.get(position).getTitle());
         adapter.setInteract(interact);
         holder.rcView.setAdapter(adapter);
@@ -53,20 +58,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
             public void onClick(View view) {
                 if (holder.rcView.getVisibility() == View.GONE) {
                     holder.rcView.setVisibility(View.VISIBLE);
-                    ConstraintSet set = new ConstraintSet();
-                    set.clone(holder.mainLayout);
-                    set.clear(R.id.cardView4, ConstraintSet.BOTTOM);
-                    set.applyTo(holder.mainLayout);
                 } else {
                     holder.rcView.setVisibility(View.GONE);
-                    ConstraintSet set = new ConstraintSet();
-                    set.clone(holder.mainLayout);
-                    set.connect(R.id.cardView4,
-                            ConstraintSet.BOTTOM,
-                            ConstraintSet.PARENT_ID,
-                            ConstraintSet.BOTTOM,
-                            8);
-                    set.applyTo(holder.mainLayout);
                 }
             }
         });
@@ -77,20 +70,24 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
         return objects.size();
     }
 
+    public void setTeachCount(int[] teachCount) {
+        this.teachCount = teachCount;
+        notifyDataSetChanged();
+    }
 
     static class ClassObjectHolder extends RecyclerView.ViewHolder {
         RecyclerView rcView;
-        TextView title;
+        TextView title, extraSub, teachersCount;
         ConstraintLayout clickEvent, mainLayout;
-        CardView cardView;
 
         ClassObjectHolder(@NonNull View itemView) {
             super(itemView);
             rcView = itemView.findViewById(R.id.id_rcview_subs);
             title = itemView.findViewById(R.id.textView15);
+            extraSub = itemView.findViewById(R.id.textView52);
             clickEvent = itemView.findViewById(R.id.constraintLayout);
-            cardView = itemView.findViewById(R.id.cardView4);
             mainLayout = itemView.findViewById(R.id.main_layout);
+            teachersCount = itemView.findViewById(R.id.textView51);
         }
     }
 }

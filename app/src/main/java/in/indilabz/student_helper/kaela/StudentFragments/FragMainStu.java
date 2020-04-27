@@ -32,32 +32,38 @@ public class FragMainStu extends Fragment {
         return view;
     }
 
-    void rcViewSetup() {
+    private void rcViewSetup() {
         RecyclerView rcView = view.findViewById(R.id.id_stu_main_rcview);
         rcView.setHasFixedSize(true);
         rcView.setLayoutManager(new LinearLayoutManager(getContext()));
         StudentAdapter adapter = new StudentAdapter(getContext(), getDataForDisplay());
+        adapter.setTeachCount(getFacultyCounter());
         adapter.setInteract(interact);
         rcView.setAdapter(adapter);
     }
 
+    private int[] getFacultyCounter() {
+        return new int[]{45, 56, 67, 45, 11, 2, 59, 8, 1, 32, 65, 45};
+    }
+
     private ArrayList<ClassObjectStudents> getDataForDisplay() {
         ArrayList<ClassObjectStudents> container = new ArrayList<>();
-        ClassObjectStudents obj = new ClassObjectStudents();
-        obj.setTitle("5");
+
         String[] subs = {"Hindi", "English", "Maths", "SST", "Physical Education"};
-        obj.setSubs(subs);
-        container.add(obj);
-        obj.setTitle("6");
-        obj.setSubs(subs);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
-        container.add(obj);
+
+        container.add(new ClassObjectStudents("5", subs));
+        container.add(new ClassObjectStudents("6", subs));
+        container.add(new ClassObjectStudents("7", subs));
+        container.add(new ClassObjectStudents("8", subs));
+        container.add(new ClassObjectStudents("9", subs));
+        container.add(new ClassObjectStudents("10", subs));
+        container.add(new ClassObjectStudents("11", subs, "Science"));
+        container.add(new ClassObjectStudents("11", subs, "Commerce"));
+        container.add(new ClassObjectStudents("11", subs, "Arts"));
+        container.add(new ClassObjectStudents("12", subs, "Science"));
+        container.add(new ClassObjectStudents("12", subs, "Commerce"));
+        container.add(new ClassObjectStudents("12", subs, "Arts"));
+
         return container;
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="@android:color/transparent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -41,7 +42,7 @@
 
             <TextView
                 android:id="@+id/textView17"
-                android:layout_width="110sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-medium"
@@ -49,7 +50,6 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/circleImageView"
                 app:layout_constraintStart_toStartOf="@+id/circleImageView"
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
@@ -121,7 +121,7 @@
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView18"
-                app:layout_constraintStart_toEndOf="@+id/textView18"
+                app:layout_constraintStart_toEndOf="@+id/circleImageView"
                 app:layout_constraintTop_toTopOf="@+id/textView18"
                 app:srcCompat="@drawable/ic_study" />
 

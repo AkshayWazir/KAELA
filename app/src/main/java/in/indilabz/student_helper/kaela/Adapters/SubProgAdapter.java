@@ -37,14 +37,6 @@ public class SubProgAdapter extends RecyclerView.Adapter<SubProgAdapter.SubsView
     public void onBindViewHolder(@NonNull SubsViewHolder holder, int position) {
         holder.title.setText(objects.get(position).getTitle());
         holder.progess.setProgress(objects.get(position).getProgress());
-        float prog = objects.get(position).getProgress();
-        if (prog <= 40) {
-            holder.progess.setProgressBarColor(ContextCompat.getColor(ctx, R.color.red));
-        } else if (prog > 40 && prog < 75) {
-            holder.progess.setProgressBarColor(ContextCompat.getColor(ctx, R.color.colorYellow));
-        } else {
-            holder.progess.setProgressBarColor(ContextCompat.getColor(ctx, R.color.green));
-        }
     }
 
     @Override

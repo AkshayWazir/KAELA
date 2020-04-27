@@ -9,9 +9,10 @@
     <color name="red">#ff0000</color>
     <color name="Yellow">#ffff00</color>
     <color name="green">#008000</color>
-    <color name="color1">#f78154</color>
-    <color name="color2">#5fad56</color>
-    <color name="color3">#f2c14e</color>
-    <color name="color4">#4d9078</color>
-    <color name="color5">#b4436c</color>
+    <color name="color1">#00c9ff</color>
+    <color name="color2">#92fe9d</color>
+    <color name="color3">#ffffff</color>
+    <color name="color4">#00171f</color>
+    <color name="color5">#003459</color>
+    <color name="backgroundColor">#F8F8F8</color>
 </resources>

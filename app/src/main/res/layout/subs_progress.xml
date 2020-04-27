@@ -1,42 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#fff">
-
-    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-        android:id="@+id/circularProgressBar"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:cpb_progress="60"
-        app:cpb_progress_max="100"
-        app:cpb_progressbar_color="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/textView38"
-        android:layout_width="0sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-medium"
         android:text="Computer Science"
         android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-        app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+        android:textColor="@color/color5"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fadingEdgeLength="10sp"
+        app:cardCornerRadius="30sp"
+        app:cardElevation="3sp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/circularProgressBar"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                app:cpb_background_progressbar_color="@color/color3"
+                app:cpb_background_progressbar_width="30sp"
+                app:cpb_progress="60"
+                app:cpb_progress_max="100"
+                app:cpb_progressbar_color="@color/color2"
+                app:cpb_progressbar_width="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintCircleRadius="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

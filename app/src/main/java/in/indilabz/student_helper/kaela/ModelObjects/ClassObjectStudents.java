@@ -3,9 +3,28 @@ package in.indilabz.student_helper.kaela.ModelObjects;
 public class ClassObjectStudents {
     private String title;
     private String[] subs;
-    private TeacherObject[] teachers;
+    private String extraSub;
 
     public ClassObjectStudents() {
+    }
+
+    public String getExtraSub() {
+        return extraSub;
+    }
+
+    public void setExtraSub(String extraSub) {
+        this.extraSub = extraSub;
+    }
+
+    public ClassObjectStudents(String title, String[] subs) {
+        this.title = title;
+        this.subs = subs;
+    }
+
+    public ClassObjectStudents(String title, String[] subs, String extraSub) {
+        this.title = title;
+        this.subs = subs;
+        this.extraSub = extraSub;
     }
 
     public String getTitle() {
@@ -24,11 +43,4 @@ public class ClassObjectStudents {
         this.subs = subs;
     }
 
-    public TeacherObject[] getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(TeacherObject[] teachers) {
-        this.teachers = teachers;
-    }
 }

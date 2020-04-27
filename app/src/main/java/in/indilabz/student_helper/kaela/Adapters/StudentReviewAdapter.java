@@ -34,9 +34,8 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         holder.StudentName.setText(objects.get(position).getStudentName());
-        holder.question.setText(objects.get(position).getQuestion());
-        holder.subject.setText(objects.get(position).getSubject());
-        switch (objects.get(position).getRating()){
+        holder.question.setText(objects.get(position).getReview());
+        switch (objects.get(position).getRating()) {
             case (1):
                 holder.st1.setImageResource(R.drawable.ic_star_filled);
                 break;
@@ -71,14 +70,13 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     }
 
     static class ReviewViewHolder extends RecyclerView.ViewHolder {
-        TextView StudentName, subject, question;
+        TextView StudentName, question;
         ImageView st1, st2, st3, st4, st5;
 
         ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             StudentName = itemView.findViewById(R.id.textView39);
             question = itemView.findViewById(R.id.textView41);
-            subject = itemView.findViewById(R.id.textView40);
             st1 = itemView.findViewById(R.id.imageView27);
             st2 = itemView.findViewById(R.id.imageView28);
             st3 = itemView.findViewById(R.id.imageView29);

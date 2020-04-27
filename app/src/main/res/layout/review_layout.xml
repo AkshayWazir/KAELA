@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8sp">
+    android:padding="8sp"
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/textView39"
@@ -14,25 +15,24 @@
         android:fontFamily="sans-serif-medium"
         android:text="Name Of person"
         android:textColor="#000"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView27"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView28"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView39"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/textView39"
         app:srcCompat="@drawable/ic_star_empty" />
 
     <ImageView
         android:id="@+id/imageView28"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView29"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView27"
@@ -41,8 +41,8 @@
 
     <ImageView
         android:id="@+id/imageView29"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView30"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView28"
@@ -51,8 +51,8 @@
 
     <ImageView
         android:id="@+id/imageView30"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView31"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView29"
@@ -61,9 +61,9 @@
 
     <ImageView
         android:id="@+id/imageView31"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView30"
         app:layout_constraintTop_toTopOf="@+id/imageView27"
@@ -74,44 +74,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
-
-    <TextView
-        android:id="@+id/textView40"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif"
-        android:text="subject"
-        android:textColor="@color/textSubtitleColor"
-        app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toTopOf="@+id/imageView31" />
+        app:layout_constraintGuide_percent="0.69" />
 
     <TextView
         android:id="@+id/textView41"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-light"
         android:text="Question Title Comes here"
-        android:textColor="#000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView42"
-        app:layout_constraintTop_toBottomOf="@+id/imageView27" />
-
-    <TextView
-        android:id="@+id/textView42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Q."
-        android:textColor="#000"
-        android:textSize="20sp"
+        android:textColor="@color/textSubtitleColor"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView27"
-        app:layout_constraintTop_toTopOf="@+id/textView41" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView39"
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package in.indilabz.student_helper.kaela.StudentActivities;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,13 +44,13 @@ public class TeacherProfile extends AppCompatActivity {
 
     ArrayList<ReviewObject> getReviews() {
         ArrayList<ReviewObject> objects = new ArrayList<>();
-        objects.add(new ReviewObject("Akshay Rein", "Some stupid Question", "Physics", 4));
-        objects.add(new ReviewObject("Lakshay Paliwal", "Some stupid Question", "Physics", 5));
-        objects.add(new ReviewObject("Amit Dubey", "Some Extremely stupid Question", "Physics", 5));
-        objects.add(new ReviewObject("Shiwanshu Gosain", "Some stupid Question", "Physics", 3));
-        objects.add(new ReviewObject("Zaiba Shaikh", "Some stupid Question", "Physics", 5));
-        objects.add(new ReviewObject("Akshay Rein", "Some stupid Question", "Physics", 4));
-        objects.add(new ReviewObject("Akshay Rein", "Some stupid Question", "Physics", 4));
+        objects.add(new ReviewObject("Akshay Rein", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 4));
+        objects.add(new ReviewObject("Lakshay Paliwal", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 5));
+        objects.add(new ReviewObject("Amit Dubey", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 5));
+        objects.add(new ReviewObject("Shiwanshu Gosain", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 3));
+        objects.add(new ReviewObject("Zaiba Shaikh", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 5));
+        objects.add(new ReviewObject("Akshay Rein", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 4));
+        objects.add(new ReviewObject("Akshay Rein", "Some Review About the teacher like how was the solution and how well it was explained by him was it sufficiently explaining the question which was asked and can it be re used or bla bla", "Physics", 4));
         return objects;
     }
 }

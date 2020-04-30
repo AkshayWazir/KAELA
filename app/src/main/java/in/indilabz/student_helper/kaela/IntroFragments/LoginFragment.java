@@ -21,14 +21,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
-import in.indilabz.student_helper.kaela.R;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
 import in.indilabz.student_helper.kaela.PublicLinks;
+import in.indilabz.student_helper.kaela.R;
 
 public class LoginFragment extends Fragment {
     private FragInteract interact;
@@ -105,6 +105,9 @@ public class LoginFragment extends Fragment {
 
                                 interact.registerComplete(Integer.parseInt(success));
                                 Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "User Not found", Toast.LENGTH_SHORT).show();
+                                updateui(false);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

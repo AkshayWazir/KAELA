@@ -14,9 +14,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 
+import in.indilabz.student_helper.kaela.Interfaces.TeaFragInteract;
 import in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel;
 
-public class TeacherMainScreen extends AppCompatActivity {
+public class TeacherMainScreen extends AppCompatActivity implements TeaFragInteract {
     BubbleNavigationConstraintView bottomNav;
     QuestioningPannel FragAskQuestion;
 
@@ -56,5 +57,10 @@ public class TeacherMainScreen extends AppCompatActivity {
                 finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showTheQuestion(String quesId) {
+
     }
 }

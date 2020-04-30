@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grad_back1"
+    android:background="@color/backgroundColor"
     tools:context="in.indilabz.student_helper.kaela.StudentFragments.FragMainStu">
 
     <androidx.recyclerview.widget.RecyclerView

@@ -95,7 +95,6 @@ public class LoginFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("RESPONSE");
                             if (!success.equals("-1") && !success.equals("2")) {
-
                                 SharedPreferences prefs = getContext().getSharedPreferences("USER", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
 

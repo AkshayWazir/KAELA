@@ -9,12 +9,12 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
 import in.indilabz.student_helper.kaela.IntroFragments.FragChildSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.FragTeacherSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.FragmentChooseSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.IntroScreenFrag;
 import in.indilabz.student_helper.kaela.IntroFragments.LoginFragment;
-import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
 
 public class IntroductionActivity extends AppCompatActivity implements FragInteract {
     FrameLayout fragContainer;
@@ -89,6 +89,7 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
 
     @Override
     public void registerComplete(int direc) {
+
         switch (direc) {
             case (0):
                 startActivity(new Intent(this, StudentMainScreen.class));

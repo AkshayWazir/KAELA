@@ -10,14 +10,30 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
+
+import in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel;
 
 public class TeacherMainScreen extends AppCompatActivity {
+    BubbleNavigationConstraintView bottomNav;
+    QuestioningPannel FragAskQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main_screen);
+        bottomNav = findViewById(R.id.id_teach_navBar);
+        FragAskQuestion = new QuestioningPannel();
+        if (savedInstanceState == null) {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
+            bottomNav.setCurrentActiveItem(2);
+        }
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

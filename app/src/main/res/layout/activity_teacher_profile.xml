@@ -56,7 +56,7 @@
         android:fontFamily="sans-serif-light"
         android:text="Ph. D. Quantum Physics"
         android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView21"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView30"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -205,8 +205,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-light"
         android:text="SUBJECT RATING"
-        android:textColor="@color/color4"
+        android:textColor="@color/color5"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
@@ -217,8 +218,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-light"
         android:text="STUDENT'S REVIEW"
-        android:textColor="@color/color4"
+        android:textColor="@color/color5"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subs_review" />

@@ -5,9 +5,13 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8sp"
+    android:layout_marginStart="16sp"
+    android:layout_marginTop="4sp"
+    android:layout_marginEnd="16sp"
+    android:layout_marginBottom="4sp"
     android:animateLayoutChanges="true"
     android:background="@drawable/back1_bottom"
+    android:elevation="3sp"
     android:hapticFeedbackEnabled="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +47,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:elevation="3sp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="cursive"
             android:text="12"
             android:textColor="@color/color5"
             android:textSize="24sp"
@@ -60,13 +64,14 @@
             android:textColor="@color/color5"
             app:layout_constraintBottom_toBottomOf="@+id/textView15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
 
         <TextView
             android:id="@+id/textView51"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-light"
             android:paddingStart="4sp"
             android:paddingTop="4sp"
@@ -82,7 +87,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_rcview_subs"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"

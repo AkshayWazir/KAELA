@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+            android:id="@+id/id_tea_ask_bar"
+            android:layout_width="match_parent"
+            android:layout_height="72sp"
+            android:background="@color/backgroundColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/id_tech_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                app:bt_colorActive="@color/color3"
+                app:bt_colorInactive="#FF0000"
+                app:bt_icon="@drawable/ic_problem"
+                app:bt_iconHeight="24dp"
+                app:bt_iconWidth="24dp"
+                app:bt_shape="@drawable/problem_back"
+                app:bt_title="Unsolved"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/id_teach_group"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/id_teach_group"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                app:bt_colorActive="@color/color3"
+                app:bt_colorInactive="@color/color2"
+                app:bt_icon="@drawable/ic_subtraction_1"
+                app:bt_iconHeight="24dp"
+                app:bt_iconWidth="24dp"
+                app:bt_shape="@drawable/solved_back"
+                app:bt_title="Solved"
+                app:layout_constraintBottom_toBottomOf="@+id/id_tech_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/id_tech_profile"
+                app:layout_constraintTop_toTopOf="@+id/id_tech_profile" />
+        </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_unsolved"
+            android:layout_width="0sp"
+            android:layout_height="0sp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_tea_ask_bar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_solved"
+            android:layout_width="0sp"
+            android:layout_height="0sp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_tea_ask_bar" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

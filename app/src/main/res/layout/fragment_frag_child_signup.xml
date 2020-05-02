@@ -50,9 +50,11 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="6sp"
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textColor="#000" />
+                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +75,8 @@
                 android:drawablePadding="6sp"
                 android:hint="Contact Number"
                 android:inputType="phone"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +97,8 @@
                 android:drawablePadding="6sp"
                 android:hint="Email ID"
                 android:inputType="textEmailAddress"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,16 +112,17 @@
             app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#000">
+            app:passwordToggleTint="@color/color5">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
                 android:drawableStart="@drawable/ic_key"
                 android:drawablePadding="6sp"
+                android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -134,11 +139,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/father_s_name"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="6sp"
+                android:hint="@string/father_s_name"
                 android:inputType="textPersonName"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -155,11 +161,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/city"
                 android:drawableStart="@drawable/ic_city"
                 android:drawablePadding="6sp"
+                android:hint="@string/city"
                 android:inputType="textPersonName"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -176,11 +183,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/school"
                 android:drawableStart="@drawable/ic_school"
                 android:drawablePadding="6sp"
+                android:hint="@string/school"
                 android:inputType="textPersonName"
-                android:textColor="#000" />
+                android:drawableTint="@color/color5"
+                android:textColor="@color/color5"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
@@ -189,8 +197,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="11sp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="7sp"
+            app:cardElevation="5sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -201,7 +209,7 @@
                 android:id="@+id/create_account_student"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#000"
+                android:background="@color/color4"
                 android:padding="8sp">
 
                 <TextView
@@ -234,13 +242,13 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cabin_medium"
+            android:fontFamily="sans-serif-light"
             android:text="Student Registration"
-            android:textColor="#000"
+            android:textColor="@color/color5"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView9" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

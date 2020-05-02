@@ -23,7 +23,7 @@ public class SubsAdapter extends RecyclerView.Adapter<SubsAdapter.SubsViewHolder
         this.interact = interact;
     }
 
-    SubsAdapter(String[] subs, Context ctx, String classSubject) {
+    public SubsAdapter(String[] subs, Context ctx, String classSubject) {
         this.subs = subs;
         this.ctx = ctx;
         this.classSubject = classSubject;

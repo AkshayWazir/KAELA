@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.indilabz.student_helper.kaela.Interfaces.TeaSelecInter;
-import in.indilabz.student_helper.kaela.ModelObjects.ClassObjectStudents;
 import in.indilabz.student_helper.kaela.R;
 import in.indilabz.student_helper.kaela.TeaActivity.moTea.ClasObjTea;
 
@@ -26,6 +25,7 @@ public class SubSelecAdapter extends RecyclerView.Adapter<SubSelecAdapter.SubSel
 
     public SubSelecAdapter() {
     }
+
     public SubSelecAdapter(ArrayList<ClasObjTea> objects, Context context, TeaSelecInter interact) {
         this.objects = objects;
         this.context = context;
@@ -51,6 +51,7 @@ public class SubSelecAdapter extends RecyclerView.Adapter<SubSelecAdapter.SubSel
     @Override
     public void onBindViewHolder(@NonNull final SubSelecHolder holder, int position) {
         holder.title.setText(objects.get(position).getTitle());
+        holder.teachersCount.setVisibility(View.INVISIBLE);
         holder.rcView.setLayoutManager(new GridLayoutManager(context, 2));
         holder.rcView.setHasFixedSize(true);
         if (teachCount != null) {
@@ -59,7 +60,7 @@ public class SubSelecAdapter extends RecyclerView.Adapter<SubSelecAdapter.SubSel
         if (objects.get(position).getExtSub() != null) {
             holder.extraSub.setText(objects.get(position).getExtSub());
         }
-        SubSelecInAda adapter = new SubSelecInAda(objects.get(position).getSubs(),context);
+        SubSelecInAda adapter = new SubSelecInAda(objects.get(position).getSubs(), context);
         adapter.setInteract(interact);
         holder.rcView.setAdapter(adapter);
         holder.clickEvent.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +77,7 @@ public class SubSelecAdapter extends RecyclerView.Adapter<SubSelecAdapter.SubSel
 
     @Override
     public int getItemCount() {
-        return 0;
+        return objects.size();
     }
 
     static class SubSelecHolder extends RecyclerView.ViewHolder {

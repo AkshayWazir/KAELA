@@ -15,6 +15,7 @@ import in.indilabz.student_helper.kaela.IntroFragments.FragTeacherSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.FragmentChooseSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.IntroScreenFrag;
 import in.indilabz.student_helper.kaela.IntroFragments.LoginFragment;
+import in.indilabz.student_helper.kaela.TeaActivity.SubSelcActivity;
 
 public class IntroductionActivity extends AppCompatActivity implements FragInteract {
     FrameLayout fragContainer;
@@ -96,7 +97,7 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
                 finish();
                 break;
             case (1):
-                startActivity(new Intent(this, TeacherMainScreen.class));
+                startActivity(new Intent(this, SubSelcActivity.class));
                 finish();
                 break;
             case (2):

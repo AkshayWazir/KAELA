@@ -65,9 +65,12 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt {
     }
 
     @Override
-    public void showTeachers(String subTitle, String classTitle) {
-        startActivity(new Intent(this, ShowTeachers.class));
+    public void showTeachers(String subId) {
+        Intent intent = new Intent(this, ShowTeachers.class);
+        intent.putExtra("SUB_ID", subId);
+        startActivity(intent);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

@@ -39,17 +39,19 @@ public class SubSelecInAda extends RecyclerView.Adapter<SubSelecInAda.SubSelecIn
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubSelecInHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final SubSelecInHolder holder, final int position) {
         holder.sub.setText(subs.get(position).getSubTitle());
         holder.subs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!subs.get(position).isClicked()) {
                     view.setBackgroundColor(ContextCompat.getColor(ctx, R.color.color2));
+                    holder.sub.setTextColor(ContextCompat.getColor(ctx, R.color.color4));
                     interact.addSub(subs.get(position).getSubId());
                     subs.get(position).setClicked(true);
                 } else {
                     view.setBackgroundColor(ContextCompat.getColor(ctx, R.color.color5));
+                    holder.sub.setTextColor(ContextCompat.getColor(ctx, R.color.color3));
                     interact.removeSub(subs.get(position).getSubId());
                     subs.get(position).setClicked(false);
                 }

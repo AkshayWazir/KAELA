@@ -25,10 +25,14 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
     private ArrayList<TeacherObject> objects, allObjects;
     private AskQuestion question;
 
-    public TeacherAdapter(Context ctx, ArrayList<TeacherObject> objects) {
+    public TeacherAdapter(Context ctx) {
         this.ctx = ctx;
+    }
+
+    public void setObjects(ArrayList<TeacherObject> objects) {
         this.objects = objects;
         this.allObjects = new ArrayList<>(objects);
+        notifyDataSetChanged();
     }
 
     public void setQuestion(AskQuestion question) {

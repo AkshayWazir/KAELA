@@ -66,7 +66,7 @@ public class FragTeacherSignup extends Fragment {
         return view;
     }
 
-    void updateUi(boolean state) {
+    private void updateUi(boolean state) {
         if (state) {
             bar.setVisibility(View.VISIBLE);
         } else {

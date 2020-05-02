@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 import in.indilabz.student_helper.kaela.Adapters.TeacherAdapter;
 import in.indilabz.student_helper.kaela.Interfaces.AskQuestion;
-import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.R;
 
 public class ShowTeachers extends AppCompatActivity implements AskQuestion {
@@ -31,10 +30,15 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_teachers);
+
+        Intent intent = getIntent();
+        String subId = intent.getStringExtra("SUB_ID");
+
         recyclerView = findViewById(R.id.teacher_rcview);
         submit_btn = findViewById(R.id.button3);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        adapter = new TeacherAdapter(this, getTeachers());
+        adapter = new TeacherAdapter(this);
+        getTeachers(subId);
         adapter.setQuestion(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
@@ -50,20 +54,8 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
         });
     }
 
+    void getTeachers(String subid) {
 
-    ArrayList<TeacherObject> getTeachers() {
-        ArrayList<TeacherObject> objects = new ArrayList<>();
-        objects.add(new TeacherObject("", "Ram Raheem", "Professor", "3"));
-        objects.add(new TeacherObject("", "Akshay Rein", "Professor", "2"));
-        objects.add(new TeacherObject("", "Amisha Gupta", "Professor", "2"));
-        objects.add(new TeacherObject("", "Amit Dubey", "Professor", "2"));
-        objects.add(new TeacherObject("", "Shiwanshu Goshain", "Professor", "2"));
-        objects.add(new TeacherObject("", "Karan Saspal", "Professor", "2"));
-        objects.add(new TeacherObject("", "Deeku Topper", "Professor", "2"));
-        objects.add(new TeacherObject("", "Maheep Walia", "Professor", "2"));
-        objects.add(new TeacherObject("", "Ashwani Gupta", "Professor", "2"));
-        objects.add(new TeacherObject("", "Topi Master", "Professor", "2"));
-        return objects;
     }
 
     @Override

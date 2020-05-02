@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TeaActivity.SubSelcActivity"></activity>
+        <activity
+            android:name=".TeaActivity.SubSelcActivity"
+            android:label="Select The Subjects"/>
         <activity android:name=".TeaActivity.SolveQuestionActi" />
         <activity
             android:name=".StudentActivities.TeacherProfile"

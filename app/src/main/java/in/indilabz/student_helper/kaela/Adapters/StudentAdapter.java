@@ -16,10 +16,11 @@ import java.util.ArrayList;
 import in.indilabz.student_helper.kaela.Interfaces.StuFraInt;
 import in.indilabz.student_helper.kaela.ModelObjects.ClassObjectStudents;
 import in.indilabz.student_helper.kaela.R;
+import in.indilabz.student_helper.kaela.TeaActivity.moTea.ClasObjTea;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObjectHolder> {
     private Context context;
-    private ArrayList<ClassObjectStudents> objects;
+    private ArrayList<ClasObjTea> objects;
     private StuFraInt interact;
     private int[] teachCount;
 
@@ -27,7 +28,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
         this.interact = interact;
     }
 
-    public StudentAdapter(Context context, ArrayList<ClassObjectStudents> objects) {
+    public StudentAdapter(Context context, ArrayList<ClasObjTea> objects) {
         this.context = context;
         this.objects = objects;
     }
@@ -47,10 +48,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
         if (teachCount != null) {
             holder.teachersCount.setText(String.format("%s : Members", Integer.toString(teachCount[position])));
         }
-        if (objects.get(position).getExtraSub() != null) {
-            holder.extraSub.setText(objects.get(position).getExtraSub());
+        if (objects.get(position).getExtSub() != null) {
+            holder.extraSub.setText(objects.get(position).getExtSub());
         }
-        SubsAdapter adapter = new SubsAdapter(objects.get(position).getSubs(), context, objects.get(position).getTitle());
+        SubsAdapter adapter = new SubsAdapter(objects.get(position).getSubs(), context);
         adapter.setInteract(interact);
         holder.rcView.setAdapter(adapter);
         holder.clickEvent.setOnClickListener(new View.OnClickListener() {

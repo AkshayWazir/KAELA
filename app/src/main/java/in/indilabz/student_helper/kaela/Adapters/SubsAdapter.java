@@ -10,23 +10,26 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import in.indilabz.student_helper.kaela.Interfaces.StuFraInt;
 import in.indilabz.student_helper.kaela.R;
+import in.indilabz.student_helper.kaela.TeaActivity.moTea.SubObj;
 
 public class SubsAdapter extends RecyclerView.Adapter<SubsAdapter.SubsViewHolder> {
-    private String[] subs;
+    private ArrayList<SubObj> subs;
     private Context ctx;
-    private String classSubject;
+
     private StuFraInt interact;
 
     public void setInteract(StuFraInt interact) {
         this.interact = interact;
     }
 
-    public SubsAdapter(String[] subs, Context ctx, String classSubject) {
+    SubsAdapter(ArrayList<SubObj> subs, Context ctx) {
         this.subs = subs;
         this.ctx = ctx;
-        this.classSubject = classSubject;
+
     }
 
     @NonNull
@@ -38,18 +41,18 @@ public class SubsAdapter extends RecyclerView.Adapter<SubsAdapter.SubsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SubsViewHolder holder, final int position) {
-        holder.sub.setText(subs[position]);
+        holder.sub.setText(subs.get(position).getSubTitle());
         holder.subs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                interact.showTeachers(classSubject, subs[position]);
+                interact.showTeachers(subs.get(position).getSubId());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return subs.length;
+        return subs.size();
     }
 
 

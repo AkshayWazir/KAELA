@@ -169,7 +169,6 @@ public class SubSelcActivity extends AppCompatActivity implements TeaSelecInter 
     }
 
     void SaveData() {
-        // TODO: 5/2/2020 Save The Data here
         SharedPreferences sharedPref = this.getSharedPreferences("USER", MODE_PRIVATE);
         final String mail = sharedPref.getString("EMAIL", "");
         final StringBuilder builder = new StringBuilder();

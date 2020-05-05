@@ -15,12 +15,12 @@ public class TeacherObject {
         this.selected = selected;
     }
 
-    public TeacherObject(String imgUrl, String name, String designation, String rating) {
+    public TeacherObject(String imgUrl, String name, String designation, String rating, String id) {
         this.imgUrl = imgUrl;
         this.name = name;
         this.designation = designation;
         this.rating = rating;
-        this.id = "";
+        this.id = id;
         selected = false;
     }
 

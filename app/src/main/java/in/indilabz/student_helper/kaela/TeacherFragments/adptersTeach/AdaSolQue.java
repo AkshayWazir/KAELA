@@ -20,6 +20,7 @@ public class AdaSolQue extends RecyclerView.Adapter<AdaSolQue.AdaSolQueHolder> {
 
     public AdaSolQue( Context context) {
         this.context = context;
+        objects = new ArrayList<>();
     }
 
     public void setObjects(ArrayList<AdaUnsQueObj> objects) {

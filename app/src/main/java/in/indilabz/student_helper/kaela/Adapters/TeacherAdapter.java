@@ -27,6 +27,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
 
     public TeacherAdapter(Context ctx) {
         this.ctx = ctx;
+        objects = new ArrayList<>();
     }
 
     public void setObjects(ArrayList<TeacherObject> objects) {

@@ -18,8 +18,9 @@ public class AdaUnsQue extends RecyclerView.Adapter<AdaUnsQue.AdaUnsQueHolder> {
     private ArrayList<AdaUnsQueObj> objects;
     private Context ctx;
 
-    public AdaUnsQue( Context ctx) {
+    public AdaUnsQue(Context ctx) {
         this.ctx = ctx;
+        objects = new ArrayList<>();
     }
 
     public void setObjects(ArrayList<AdaUnsQueObj> objects) {

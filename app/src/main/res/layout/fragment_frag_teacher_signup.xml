@@ -146,7 +146,7 @@
                 android:drawablePadding="6sp"
                 android:drawableTint="@color/color5"
                 android:fontFamily="@font/cabin"
-                android:hint="Experience"
+                android:hint="Designation"
                 android:inputType="text"
                 android:textColor="@color/color5" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:text="Teacher Registration"
-            android:textColor="#000"
+            android:textColor="@color/color5"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
             app:layout_constraintEnd_toEndOf="parent"

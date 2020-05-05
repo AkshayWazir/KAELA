@@ -19,7 +19,7 @@
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="72sp"
-        android:background="@drawable/bottom_nav_back"
+        android:background="@color/color5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -35,10 +35,11 @@
             app:bt_iconWidth="24dp"
             app:bt_shape="@drawable/back1_bottom"
             app:bt_title="Groups"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ask_id"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="11dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/ask_id"
@@ -51,10 +52,11 @@
             app:bt_iconWidth="24dp"
             app:bt_shape="@drawable/back1_bottom"
             app:bt_title="Ask"
+            app:layout_constraintBottom_toBottomOf="@+id/group_id"
             app:layout_constraintEnd_toStartOf="@+id/chat_id"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/group_id"
-            tools:layout_editor_absoluteY="11dp" />
+            app:layout_constraintTop_toTopOf="@+id/group_id" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/chat_id"
@@ -66,11 +68,12 @@
             app:bt_iconHeight="24dp"
             app:bt_iconWidth="24dp"
             app:bt_shape="@drawable/back1_bottom"
-            app:bt_title="chat"
+            app:bt_title="Solution"
+            app:layout_constraintBottom_toBottomOf="@+id/ask_id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ask_id"
-            tools:layout_editor_absoluteY="11dp" />
+            app:layout_constraintTop_toTopOf="@+id/ask_id" />
 
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,15 +95,24 @@ public class LoginFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("RESPONSE");
                             if (!success.equals("-1") && !success.equals("2")) {
+                                for (int i = 0; i < 1; i++) {
+                                    System.out.println(i);
+                                }
                                 SharedPreferences prefs = getContext().getSharedPreferences("USER", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
 
-                                editor.putString("NAME", jsonObject.getString("NAME"));
-                                editor.putString("EMAIL", object[1]);
+                                if (success.equals("1")) {
+                                    editor.putString("NAME", jsonObject.getJSONObject("OBJ").getString("name"));
+                                    editor.putString("EMAIL", jsonObject.getJSONObject("OBJ").getString("mail"));
+                                    editor.putString("TEACH_ID", jsonObject.getJSONObject("OBJ").getString("tea_id"));
+                                } else if (success.equals("0")) {
+                                    editor.putString("NAME", jsonObject.getJSONObject("OBJ").getString("stu_name"));
+                                    editor.putString("EMAIL", jsonObject.getJSONObject("OBJ").getString("stu_email"));
+                                }
                                 editor.putInt("TYPE", Integer.parseInt(success));
                                 editor.commit();
 
-                                interact.registerComplete(Integer.parseInt(success));
+                                interact.loginUser(Integer.parseInt(success));
                                 Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getContext(), "User Not found", Toast.LENGTH_SHORT).show();
@@ -111,13 +120,14 @@ public class LoginFragment extends Fragment {
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            updateui(false);
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Login Failed : " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Try Again", Toast.LENGTH_LONG).show();
                         updateui(false);
                     }
                 }) {

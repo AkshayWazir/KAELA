@@ -108,8 +108,21 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
     }
 
     @Override
-    public void regisTeacher() {
-
+    public void loginUser(int direc) {
+        switch (direc) {
+            case (0):
+                startActivity(new Intent(this, StudentMainScreen.class));
+                finish();
+                break;
+            case (1):
+                startActivity(new Intent(this, TeacherMainScreen.class));
+                finish();
+                break;
+            case (2):
+                startActivity(new Intent(this, AdminMainScreen.class));
+                finish();
+                break;
+        }
     }
 
 }

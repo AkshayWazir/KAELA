@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cabin_medium"
                     android:text="LOGIN"
-                    android:textColor="#000"
+                    android:textColor="@color/color4"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/cabin"
             android:text="Forgot  Password ?"
-            android:textColor="#000"
+            android:textColor="@color/color4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
@@ -84,6 +84,7 @@
                 android:fontFamily="@font/cabin"
                 android:hint="Email"
                 android:drawableStart="@drawable/ic_mail"
+                android:drawableTint="@color/color5"
                 android:drawablePadding="6sp"
                 android:inputType="textEmailAddress"
                 android:textColor="#000" />
@@ -99,13 +100,14 @@
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#000">
+            app:passwordToggleTint="@color/color5">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cabin"
                 android:hint="Password"
+                android:drawableTint="@color/color5"
                 android:drawableStart="@drawable/ic_key"
                 android:drawablePadding="6sp"
                 android:inputType="textPassword"
@@ -122,6 +124,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Welcome Back"
+            android:textColor="@color/color5"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

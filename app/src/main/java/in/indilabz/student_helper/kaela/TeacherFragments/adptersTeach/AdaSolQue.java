@@ -7,18 +7,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
 import in.indilabz.student_helper.kaela.ModelObjects.AdaUnsQueObj;
 import in.indilabz.student_helper.kaela.R;
 
 public class AdaSolQue extends RecyclerView.Adapter<AdaSolQue.AdaSolQueHolder> {
     private ArrayList<AdaUnsQueObj> objects;
     private Context context;
+    private QuesInter interact;
 
-    public AdaSolQue( Context context) {
+    public void setInteract(QuesInter interact) {
+        this.interact = interact;
+    }
+
+    public AdaSolQue(Context context) {
         this.context = context;
         objects = new ArrayList<>();
     }
@@ -36,10 +43,16 @@ public class AdaSolQue extends RecyclerView.Adapter<AdaSolQue.AdaSolQueHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaSolQueHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdaSolQueHolder holder, final int position) {
         holder.ques.setText(objects.get(position).getQues());
         holder.id.setText(objects.get(position).getId());
         holder.name.setText(objects.get(position).getName());
+        holder.catchit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interact.quesSelected(objects.get(position).getQuesId());
+            }
+        });
     }
 
     @Override
@@ -49,13 +62,14 @@ public class AdaSolQue extends RecyclerView.Adapter<AdaSolQue.AdaSolQueHolder> {
 
     static class AdaSolQueHolder extends RecyclerView.ViewHolder {
         TextView ques, name, id;
+        ConstraintLayout catchit;
 
         AdaSolQueHolder(@NonNull View itemView) {
             super(itemView);
             ques = itemView.findViewById(R.id.textView58);
             name = itemView.findViewById(R.id.textView59);
             id = itemView.findViewById(R.id.textView60);
-
+            catchit = itemView.findViewById(R.id.id_catch_1);
         }
     }
 }

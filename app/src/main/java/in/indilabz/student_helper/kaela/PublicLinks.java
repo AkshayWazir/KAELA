@@ -7,5 +7,8 @@ public class PublicLinks {
     public static String UPDATE_SUB_SELECTED = "https://pedir.in/register_user/updateSub.php";
     public static String FETCH_TEACHERS = "https://pedir.in/register_user/getuserdata.php";
     public static String UPLOAD_QUESTION = "https://pedir.in/register_user/ques_ask_proc.php";
+    public static String UPLOAD_SOLUTION = "https://pedir.in/register_user/sol_submit.php";
     public static String SOLVED_UNSOLVED_FETCH = "https://pedir.in/register_user/get_questions.php";
+    public static String GET_SOLS = "https://pedir.in/register_user/rollin_ques_sols.php";
+
 }

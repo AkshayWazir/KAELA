@@ -10,4 +10,9 @@
     <string name="father_s_name">Father\'s Name</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
+    <string name="image">ImAGE</string>
+    <string name="solution">Solution</string>
+    <string name="add_image">Add Image</string>
+    <string name="sol_image">sol_image</string>
+    <string name="post_solution">Post Solution</string>
 </resources>

@@ -1,7 +1,10 @@
 package in.indilabz.student_helper.kaela.ModelObjects;
 
 public class AdaUnsQueObj {
-    private String ques,desc,name,id,quesId;
+    private String ques, desc, name, id, quesId;
+
+    public AdaUnsQueObj() {
+    }
 
     public AdaUnsQueObj(String ques, String desc, String name, String id, String quesId) {
         this.ques = ques;

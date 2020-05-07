@@ -14,10 +14,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 
-import in.indilabz.student_helper.kaela.Interfaces.TeaFragInteract;
+import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
+import in.indilabz.student_helper.kaela.TeaActivity.SolutionActivity;
 import in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel;
 
-public class TeacherMainScreen extends AppCompatActivity implements TeaFragInteract {
+public class TeacherMainScreen extends AppCompatActivity implements QuesInter {
     BubbleNavigationConstraintView bottomNav;
     QuestioningPannel FragAskQuestion;
 
@@ -27,6 +28,7 @@ public class TeacherMainScreen extends AppCompatActivity implements TeaFragInter
         setContentView(R.layout.activity_teacher_main_screen);
         bottomNav = findViewById(R.id.id_teach_navBar);
         FragAskQuestion = new QuestioningPannel();
+        FragAskQuestion.setCtx(this);
         if (savedInstanceState == null) {
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
@@ -59,8 +61,11 @@ public class TeacherMainScreen extends AppCompatActivity implements TeaFragInter
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void showTheQuestion(String quesId) {
 
+    @Override
+    public void quesSelected(String quesId) {
+        Intent intent = new Intent(this, SolutionActivity.class);
+        intent.putExtra("QUES_ID", quesId);
+        startActivity(intent);
     }
 }

@@ -157,10 +157,8 @@ public class AskActivityQuestion extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 uploadImage();
                 view1.findViewById(R.id.progressBar5).setVisibility(View.VISIBLE);
-
             }
         });
         notNow.setOnClickListener(new View.OnClickListener() {

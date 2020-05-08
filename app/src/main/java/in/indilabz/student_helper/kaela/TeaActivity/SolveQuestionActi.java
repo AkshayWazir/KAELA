@@ -118,9 +118,6 @@ public class SolveQuestionActi extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        for (int i = 0; i < 2; i++) {
-                            System.out.println(i);
-                        }
                         try {
                             JSONObject object = new JSONObject(response);
                             String response1 = object.getString("RESPONSE");

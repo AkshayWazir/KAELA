@@ -2,11 +2,13 @@ package in.indilabz.student_helper.kaela;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
@@ -23,13 +25,16 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
     IntroScreenFrag frag;
     LoginFragment fragLog;
     FragmentChooseSignup fragSign;
+    CardView intCard;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introduction);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         fragContainer = findViewById(R.id.frame_layout_id);
+        intCard = findViewById(R.id.intro_cardview);
         animationSequence1();
 
         frag = new IntroScreenFrag();
@@ -53,7 +58,7 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.intro_translate);
         anim.setFillAfter(true);
         anim.setFillEnabled(true);
-        fragContainer.setAnimation(anim);
+        intCard.setAnimation(anim);
     }
 
     @Override

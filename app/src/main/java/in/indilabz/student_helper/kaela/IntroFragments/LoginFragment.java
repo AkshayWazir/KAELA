@@ -87,6 +87,9 @@ public class LoginFragment extends Fragment {
 
     private void verifyLogin(final String[] object) {
         updateui(true);
+        for (int i = 0; i < 1; i++) {
+            System.out.println(i);
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -104,7 +107,7 @@ public class LoginFragment extends Fragment {
                                 if (success.equals("1")) {
                                     editor.putString("NAME", jsonObject.getJSONObject("OBJ").getString("name"));
                                     editor.putString("EMAIL", jsonObject.getJSONObject("OBJ").getString("mail"));
-                                    editor.putString("TEACH_ID", jsonObject.getJSONObject("OBJ").getString("tea_id"));
+                                    editor.putString("TEACH_ID", jsonObject.getJSONObject("TEACH_ID").getString("tea_id"));
                                 } else if (success.equals("0")) {
                                     editor.putString("NAME", jsonObject.getJSONObject("OBJ").getString("stu_name"));
                                     editor.putString("EMAIL", jsonObject.getJSONObject("OBJ").getString("stu_email"));

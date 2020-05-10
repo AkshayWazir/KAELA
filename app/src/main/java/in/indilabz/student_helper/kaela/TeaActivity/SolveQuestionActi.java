@@ -1,6 +1,7 @@
 package in.indilabz.student_helper.kaela.TeaActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -62,11 +63,11 @@ public class SolveQuestionActi extends AppCompatActivity {
         bar = findViewById(R.id.progressBar7);
         begin = findViewById(R.id.begin_trans_id);
         sol_image = findViewById(R.id.zoomInImageView4);
-
         // setup data
         Intent intent = getIntent();
         quesId = intent.getStringExtra("QUES_ID");
-        teaId = intent.getStringExtra("TEA_ID");
+        SharedPreferences preferences = getSharedPreferences("USER", MODE_PRIVATE);
+        teaId = preferences.getString("TEACH_ID", "");
         setupQuestiom(quesId);
         begin.setOnClickListener(new View.OnClickListener() {
             @Override

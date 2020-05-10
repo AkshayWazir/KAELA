@@ -209,7 +209,7 @@
                 android:id="@+id/create_account_student"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color4"
+                android:background="@color/color5"
                 android:padding="8sp">
 
                 <TextView
@@ -242,7 +242,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="sans-serif"
             android:text="Student Registration"
             android:textColor="@color/color5"
             android:textSize="18sp"

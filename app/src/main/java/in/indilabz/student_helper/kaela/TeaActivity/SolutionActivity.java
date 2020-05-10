@@ -1,6 +1,7 @@
 package in.indilabz.student_helper.kaela.TeaActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -29,13 +30,17 @@ import com.zolad.zoominimageview.ZoomInImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Adapters.AdaTeaSols;
+import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
+import in.indilabz.student_helper.kaela.TeaActivity.adapter.SolutionMainAda;
+import in.indilabz.student_helper.kaela.TeaActivity.moTea.Sol_moob;
 
 public class SolutionActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -62,14 +67,16 @@ public class SolutionActivity extends AppCompatActivity {
         clickEvent = findViewById(R.id.id_catch_123456);
         bar = findViewById(R.id.progressBar6);
         solve = findViewById(R.id.solv_ques);
+
         clickEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pSList(objects);
             }
         });
-        teacher_id = getIntent().getStringExtra("QUES_ID");
-        setupQuestiom(teacher_id);
+        SharedPreferences preferences = getSharedPreferences("USERS", MODE_PRIVATE);
+        teacher_id = preferences.getString("TEACH_ID", "");
+        setupQuestiom(getIntent().getStringExtra("QUES_ID"));
     }
 
 
@@ -86,6 +93,7 @@ public class SolutionActivity extends AppCompatActivity {
                                 title.setText(objects.getJSONObject("ques").getString("ques_title"));
                                 des.setText(objects.getJSONObject("ques").getString("ques_desc"));
                                 quesImageStr = objects.getJSONObject("ques").getString("image");
+
                                 if (!quesImageStr.equals("")) {
                                     byte[] decodedString = Base64.decode(quesImageStr, Base64.DEFAULT);
                                     decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -94,6 +102,28 @@ public class SolutionActivity extends AppCompatActivity {
                                             .into(imageView);
                                     imageView.setVisibility(View.VISIBLE);
                                 }
+                                ArrayList<Sol_moob> container = new ArrayList<>();
+                                for (int i = 0; i < objects.getJSONArray("dat").length(); i++) {
+                                    JSONObject obj = objects.getJSONArray("dat").getJSONObject(i);
+                                    Sol_moob moob = new Sol_moob();
+                                    moob.setName(obj.getString("name"));
+                                    moob.setDesc(obj.getString("description"));
+                                    moob.setDesig(obj.getString("exp"));
+                                    String imgSol = obj.getString("image");
+                                    String imgPro = obj.getString("tea_propic");
+                                    if (!imgSol.equals("")){
+                                        byte[] decodedString = Base64.decode(imgSol, Base64.DEFAULT);
+                                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                        moob.setSolPic(decodedByte);
+                                    }
+                                    if (!imgPro.equals("")){
+                                        byte[] dsPro = Base64.decode(imgPro, Base64.DEFAULT);
+                                        Bitmap dbPro = BitmapFactory.decodeByteArray(dsPro, 0, dsPro.length);
+                                        moob.setSolPic(dbPro);
+                                    }
+                                    container.add(moob);
+                                }
+                                setup_sols(container);
                                 bar.setVisibility(View.GONE);
                                 solve.setVisibility(View.VISIBLE);
                             }
@@ -119,6 +149,14 @@ public class SolutionActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
         requestQueue.add(stringRequest);
+    }
+
+    void setup_sols(ArrayList<Sol_moob> objs) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        SolutionMainAda adapter = new SolutionMainAda(this);
+        adapter.setObjs(objs);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
     }
 
     public void pSList(JSONObject object) {

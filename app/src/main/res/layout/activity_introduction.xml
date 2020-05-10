@@ -4,73 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color4"
+    android:animateLayoutChanges="true"
+    android:background="@color/color5"
     tools:context="in.indilabz.student_helper.kaela.IntroductionActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="500sp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blue_line" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="500sp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/darkblue_line" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="500sp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_line" />
-
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0sp"
-        android:alpha="0.2"
-        android:background="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.17" />
+
+    <FrameLayout
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:background="#f8f8f8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline14" >
+
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/intro_cardview"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/color3"
+        android:fadingEdgeLength="5sp"
+        app:cardCornerRadius="11sp"
+        app:cardElevation="7sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
+
+        <FrameLayout
+            android:id="@+id/frame_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color3">
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="5sp"
-        android:fontFamily="serif"
-        android:text="KAELA"
-        android:textColor="#ffffff"
-        android:textSize="50sp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Welcome Back to ,"
+        android:textColor="#fff"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,23 +77,18 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NEVER STOP LEARNING"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_marginStart="8dp"
+        android:text="Kaela"
+        android:textColor="@color/color3"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-    <FrameLayout
-        android:id="@+id/frame_layout_id"
-        android:layout_width="0sp"
-        android:layout_height="0sp"
-        android:background="@drawable/curved_pannel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3">
-
-    </FrameLayout>
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

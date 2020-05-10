@@ -36,7 +36,7 @@
                     android:fontFamily="@font/cabin_medium"
                     android:text="LOGIN"
                     android:textColor="@color/color4"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
             app:layout_constraintBottom_toTopOf="@+id/id_login_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
             android:id="@+id/textView62"
@@ -132,7 +132,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="Welcome Back"
             android:textColor="@color/color5"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

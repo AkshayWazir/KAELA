@@ -10,5 +10,7 @@ public class PublicLinks {
     public static String UPLOAD_SOLUTION = "https://pedir.in/register_user/sol_submit.php";
     public static String SOLVED_UNSOLVED_FETCH = "https://pedir.in/register_user/get_questions.php";
     public static String GET_SOLS = "https://pedir.in/register_user/rollin_ques_sols.php";
-
+    public static String TEACH_PROFILE = "https://pedir.in/register_user/fetch_teach_profile.php";
+    public static String SUBMIT_REVIEW = "https://pedir.in/register_user/submit_review.php";
+    public static String UPDATE_PROPIC_TEACHER = "https://pedir.in/register_user/tea_data_update.php";
 }

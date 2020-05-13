@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,9 +18,14 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     private ArrayList<ReviewObject> objects;
     private Context context;
 
-    public StudentReviewAdapter(ArrayList<ReviewObject> objects, Context context) {
-        this.objects = objects;
+    public StudentReviewAdapter(Context context) {
         this.context = context;
+        objects = new ArrayList<>();
+    }
+
+    public void setObjects(ArrayList<ReviewObject> objects) {
+        this.objects = objects;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,33 +39,7 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         holder.StudentName.setText(objects.get(position).getStudentName());
         holder.question.setText(objects.get(position).getReview());
-        switch (objects.get(position).getRating()) {
-            case (1):
-                holder.st1.setImageResource(R.drawable.ic_star_filled);
-                break;
-            case (2):
-                holder.st1.setImageResource(R.drawable.ic_star_filled);
-                holder.st2.setImageResource(R.drawable.ic_star_filled);
-                break;
-            case (3):
-                holder.st1.setImageResource(R.drawable.ic_star_filled);
-                holder.st2.setImageResource(R.drawable.ic_star_filled);
-                holder.st3.setImageResource(R.drawable.ic_star_filled);
-                break;
-            case (4):
-                holder.st1.setImageResource(R.drawable.ic_star_filled);
-                holder.st2.setImageResource(R.drawable.ic_star_filled);
-                holder.st3.setImageResource(R.drawable.ic_star_filled);
-                holder.st4.setImageResource(R.drawable.ic_star_filled);
-                break;
-            case (5):
-                holder.st1.setImageResource(R.drawable.ic_star_filled);
-                holder.st2.setImageResource(R.drawable.ic_star_filled);
-                holder.st3.setImageResource(R.drawable.ic_star_filled);
-                holder.st4.setImageResource(R.drawable.ic_star_filled);
-                holder.st5.setImageResource(R.drawable.ic_star_filled);
-                break;
-        }
+        holder.stuSchool.setText(objects.get(position).getSchool());
     }
 
     @Override
@@ -70,18 +48,13 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     }
 
     static class ReviewViewHolder extends RecyclerView.ViewHolder {
-        TextView StudentName, question;
-        ImageView st1, st2, st3, st4, st5;
+        TextView StudentName, question, stuSchool;
 
         ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             StudentName = itemView.findViewById(R.id.textView39);
             question = itemView.findViewById(R.id.textView41);
-            st1 = itemView.findViewById(R.id.imageView27);
-            st2 = itemView.findViewById(R.id.imageView28);
-            st3 = itemView.findViewById(R.id.imageView29);
-            st4 = itemView.findViewById(R.id.imageView30);
-            st5 = itemView.findViewById(R.id.imageView31);
+            stuSchool = itemView.findViewById(R.id.textView77);
         }
     }
 }

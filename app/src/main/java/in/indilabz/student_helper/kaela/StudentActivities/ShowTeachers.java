@@ -80,9 +80,6 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        for (int i = 0; i < 2; i++) {
-                            System.out.println(i);
-                        }
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             ArrayList<TeacherObject> objects = new ArrayList<>();
@@ -91,7 +88,7 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                                 JSONObject object = new JSONObject(response);
                                 for (int i = 0; i < object.getJSONArray("dat").length(); i++) {
                                     JSONObject obj = object.getJSONArray("dat").getJSONObject(i);
-                                    objects.add(new TeacherObject("", obj.getString("name"), obj.getString("exp"), obj.getString("rating"),obj.getString("tea_id")));
+                                    objects.add(new TeacherObject("", obj.getString("name"), obj.getString("exp"), obj.getString("connections"), obj.getString("tea_id")));
                                 }
                                 bar.setVisibility(View.GONE);
                                 adapter.setObjects(objects);
@@ -106,7 +103,8 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Login Failed : " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Try Again :" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }) {
             @Override
@@ -129,14 +127,16 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     @Override
     public void removeTeacher(String teachId) {
         teachersId.remove(teachId);
-        if (teachId.length() == 0) {
+        if (teachersId.size() == 0) {
             submit_btn.setVisibility(View.INVISIBLE);
         }
     }
 
     @Override
     public void showProfile(String teachId) {
-        startActivity(new Intent(this, TeacherProfile.class));
+        Intent intent = new Intent(this, TeacherProfile.class);
+        intent.putExtra("TEACH_ID", teachId);
+        startActivity(intent);
     }
 
     @Override

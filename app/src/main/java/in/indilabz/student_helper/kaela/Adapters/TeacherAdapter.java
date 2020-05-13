@@ -51,26 +51,6 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
     public void onBindViewHolder(@NonNull final teachViewHolder holder, final int position) {
         holder.name.setText(objects.get(position).getName());
         holder.title.setText(objects.get(position).getDesignation());
-        switch (Integer.parseInt(objects.get(position).getRating())) {
-            case (1):
-                holder.star2.setImageResource(R.drawable.ic_star_empty);
-                holder.star3.setImageResource(R.drawable.ic_star_empty);
-                holder.star4.setImageResource(R.drawable.ic_star_empty);
-                holder.star5.setImageResource(R.drawable.ic_star_empty);
-                break;
-            case (2):
-                holder.star3.setImageResource(R.drawable.ic_star_empty);
-                holder.star4.setImageResource(R.drawable.ic_star_empty);
-                holder.star5.setImageResource(R.drawable.ic_star_empty);
-                break;
-            case (3):
-                holder.star4.setImageResource(R.drawable.ic_star_empty);
-                holder.star5.setImageResource(R.drawable.ic_star_empty);
-                break;
-            case (4):
-                holder.star5.setImageResource(R.drawable.ic_star_empty);
-                break;
-        }
         holder.clickable
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -86,6 +66,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
                         }
                     }
                 });
+        holder.connect.setText(objects.get(position).getConnections());
         holder.showProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,22 +115,18 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
     static class teachViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout clickable, showProfile;
         ImageView profPic;
-        ImageView star1, star2, star3, star4, star5, check;
-        TextView name, title;
+        ImageView check;
+        TextView name, title, connect;
 
         teachViewHolder(@NonNull View itemView) {
             super(itemView);
             profPic = itemView.findViewById(R.id.circleImageView);
-            star1 = itemView.findViewById(R.id.imageView14);
-            star2 = itemView.findViewById(R.id.imageView17);
-            star3 = itemView.findViewById(R.id.imageView16);
-            star4 = itemView.findViewById(R.id.imageView18);
-            star5 = itemView.findViewById(R.id.imageView15);
             name = itemView.findViewById(R.id.textView17);
             title = itemView.findViewById(R.id.textView18);
             clickable = itemView.findViewById(R.id.teacher_container);
             check = itemView.findViewById(R.id.imageView20);
             showProfile = itemView.findViewById(R.id.id_showprof);
+            connect = itemView.findViewById(R.id.textView29);
         }
     }
 }

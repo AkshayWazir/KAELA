@@ -17,6 +17,15 @@
         <item name="colorControlActivated">@color/color5</item>
         <item name="colorControlHighlight">@color/color5</item>
     </style>
+
+    <style name="CustomTextAppearance" parent="Widget.Design.TextInputLayout">
+        <item name="errorTextAppearance">@android:color/holo_red_dark</item>
+        <item name="android:textColor">@color/color3</item>
+        <item name="android:textColorHint">@color/color3</item>
+        <item name="colorControlNormal">@color/color3</item>
+        <item name="colorControlActivated">@color/color3</item>
+        <item name="colorControlHighlight">@color/color3</item>
+    </style>
     
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>

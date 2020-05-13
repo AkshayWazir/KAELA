@@ -49,7 +49,7 @@ public class IntroScreenFrag extends Fragment {
                         }
                     }
                 });
-        view.findViewById(R.id.id_goto_signup)
+        view.findViewById(R.id.cardView)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

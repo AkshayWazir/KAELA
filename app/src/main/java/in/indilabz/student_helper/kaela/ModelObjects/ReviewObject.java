@@ -1,17 +1,19 @@
 package in.indilabz.student_helper.kaela.ModelObjects;
 
 public class ReviewObject {
-    private String StudentName, review, subject;
-    private int rating;
+    private String StudentName, review, School;
 
     public ReviewObject() {
     }
 
-    public ReviewObject(String studentName, String review, String subject, int rating) {
+    public ReviewObject(String studentName, String review,String school) {
         StudentName = studentName;
         this.review = review;
-        this.subject = subject;
-        this.rating = rating;
+        this.School = school;
+    }
+
+    public String getSchool() {
+        return School;
     }
 
     public String getStudentName() {
@@ -20,13 +22,5 @@ public class ReviewObject {
 
     public String getReview() {
         return review;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public int getRating() {
-        return rating;
     }
 }

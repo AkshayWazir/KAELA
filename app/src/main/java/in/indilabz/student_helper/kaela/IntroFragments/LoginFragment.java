@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        view.findViewById(R.id.imageView4)
+        view.findViewById(R.id.cardView12)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment {
                     }
                 });
 
-        view.findViewById(R.id.id_login_btn)
+        view.findViewById(R.id.cardView13)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -87,9 +87,6 @@ public class LoginFragment extends Fragment {
 
     private void verifyLogin(final String[] object) {
         updateui(true);
-        for (int i = 0; i < 1; i++) {
-            System.out.println(i);
-        }
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -98,9 +95,6 @@ public class LoginFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("RESPONSE");
                             if (!success.equals("-1") && !success.equals("2")) {
-                                for (int i = 0; i < 1; i++) {
-                                    System.out.println(i);
-                                }
                                 SharedPreferences prefs = getContext().getSharedPreferences("USER", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
 

@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Adapters.AdaTeaSols;
-import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 import in.indilabz.student_helper.kaela.TeaActivity.adapter.SolutionMainAda;
@@ -111,12 +110,12 @@ public class SolutionActivity extends AppCompatActivity {
                                     moob.setDesig(obj.getString("exp"));
                                     String imgSol = obj.getString("image");
                                     String imgPro = obj.getString("tea_propic");
-                                    if (!imgSol.equals("")){
+                                    if (!imgSol.equals("")) {
                                         byte[] decodedString = Base64.decode(imgSol, Base64.DEFAULT);
                                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                                         moob.setSolPic(decodedByte);
                                     }
-                                    if (!imgPro.equals("")){
+                                    if (!imgPro.equals("")) {
                                         byte[] dsPro = Base64.decode(imgPro, Base64.DEFAULT);
                                         Bitmap dbPro = BitmapFactory.decodeByteArray(dsPro, 0, dsPro.length);
                                         moob.setSolPic(dbPro);

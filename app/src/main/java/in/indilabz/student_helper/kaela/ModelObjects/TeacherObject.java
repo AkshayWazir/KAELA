@@ -1,7 +1,7 @@
 package in.indilabz.student_helper.kaela.ModelObjects;
 
 public class TeacherObject {
-    private String imgUrl, name, designation, rating, id;
+    private String imgUrl, name, designation, connections, id;
     private boolean selected;
 
     public TeacherObject() {
@@ -15,11 +15,11 @@ public class TeacherObject {
         this.selected = selected;
     }
 
-    public TeacherObject(String imgUrl, String name, String designation, String rating, String id) {
+    public TeacherObject(String imgUrl, String name, String designation, String connections, String id) {
         this.imgUrl = imgUrl;
         this.name = name;
         this.designation = designation;
-        this.rating = rating;
+        this.connections = connections;
         this.id = id;
         selected = false;
     }
@@ -52,11 +52,11 @@ public class TeacherObject {
         this.designation = designation;
     }
 
-    public String getRating() {
-        return rating;
+    public String getConnections() {
+        return connections;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setConnections(String connections) {
+        this.connections = connections;
     }
 }

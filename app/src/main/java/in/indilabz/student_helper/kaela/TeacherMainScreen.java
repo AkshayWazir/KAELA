@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
+import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 
 import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
+import in.indilabz.student_helper.kaela.StudentActivities.TeacherProfile;
 import in.indilabz.student_helper.kaela.TeaActivity.SolutionActivity;
 import in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel;
 
@@ -29,11 +32,26 @@ public class TeacherMainScreen extends AppCompatActivity implements QuesInter {
         bottomNav = findViewById(R.id.id_teach_navBar);
         FragAskQuestion = new QuestioningPannel();
         FragAskQuestion.setCtx(this);
+
         if (savedInstanceState == null) {
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
             bottomNav.setCurrentActiveItem(2);
         }
+        bottomNav.setNavigationChangeListener(new BubbleNavigationChangeListener() {
+            @Override
+            public void onNavigationChanged(View view, int position) {
+                switch (position) {
+                    case (0):
+                        startActivity(new Intent(getApplicationContext(), TeacherProfile.class));
+                        break;
+                    case(2):
+                        FragmentManager manager = getSupportFragmentManager();
+                        manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
+                        break;
+                }
+            }
+        });
 
     }
 

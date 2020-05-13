@@ -3,89 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="in.indilabz.student_helper.kaela.IntroFragments.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/id_login_btn"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView13"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
-            android:background="@android:color/transparent"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/color3"
+            android:fadingEdgeLength="5sp"
+            app:cardCornerRadius="11sp"
+            app:cardElevation="7sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/plane_white_background"
-                android:paddingTop="8sp"
-                android:paddingBottom="8sp">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/cabin_medium"
-                    android:text="LOGIN"
-                    android:textColor="@color/color4"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
+                android:layout_gravity="center"
+                android:layout_margin="8sp"
+                android:fontFamily="@font/cabin_medium"
+                android:text="LOGIN"
+                android:textColor="@color/color4"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/cabin"
             android:text="Forgot  Password ?"
             android:textColor="@color/color4"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/ic_backbtn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:theme="@style/TextInputLayoutAppearance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+            app:layout_constraintStart_toStartOf="@+id/cardView12"
+            app:layout_constraintTop_toBottomOf="@+id/cardView12">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="6sp"
+                android:drawableTint="@color/color5"
                 android:fontFamily="@font/cabin"
                 android:hint="Email"
-                android:drawableStart="@drawable/ic_mail"
-                android:drawableTint="@color/color5"
-                android:drawablePadding="6sp"
                 android:inputType="textEmailAddress"
                 android:textColor="#000" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +74,7 @@
             android:id="@+id/textInputLayout2"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:theme="@style/TextInputLayoutAppearance"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
@@ -105,11 +85,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin"
-                android:hint="Password"
-                android:drawableTint="@color/color5"
                 android:drawableStart="@drawable/ic_key"
                 android:drawablePadding="6sp"
+                android:drawableTint="@color/color5"
+                android:fontFamily="@font/cabin"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="#000" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -119,8 +99,9 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/id_login_btn"
+            app:layout_constraintBottom_toTopOf="@+id/cardView13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -133,10 +114,32 @@
             android:text="Welcome Back"
             android:textColor="@color/color5"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            app:layout_constraintTop_toTopOf="@+id/cardView12" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView12"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/color5"
+            android:fadingEdgeLength="5sp"
+            app:cardCornerRadius="50sp"
+            app:cardElevation="7sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="2sp"
+                android:src="@drawable/ic_backbtn" />
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

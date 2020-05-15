@@ -12,11 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -24,9 +22,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
@@ -87,7 +85,7 @@ public class LoginFragment extends Fragment {
 
     private void verifyLogin(final String[] object) {
         updateui(true);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -97,7 +95,6 @@ public class LoginFragment extends Fragment {
                             if (!success.equals("-1") && !success.equals("2")) {
                                 SharedPreferences prefs = getContext().getSharedPreferences("USER", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
-
                                 if (success.equals("1")) {
                                     editor.putString("NAME", jsonObject.getJSONObject("OBJ").getString("name"));
                                     editor.putString("EMAIL", jsonObject.getJSONObject("OBJ").getString("mail"));
@@ -124,8 +121,7 @@ public class LoginFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Try Again", Toast.LENGTH_LONG).show();
-                        updateui(false);
+                        Toast.makeText(getContext().getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -136,7 +132,6 @@ public class LoginFragment extends Fragment {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 }

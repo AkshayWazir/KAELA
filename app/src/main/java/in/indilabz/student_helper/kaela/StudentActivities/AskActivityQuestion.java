@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
@@ -157,6 +158,7 @@ public class AskActivityQuestion extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setEnabled(false);
                 uploadImage();
                 view1.findViewById(R.id.progressBar5).setVisibility(View.VISIBLE);
             }
@@ -212,8 +214,7 @@ public class AskActivityQuestion extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(request);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
     // method to convert image to stream Bytes

@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
@@ -146,7 +147,6 @@ public class FragTeacherSignup extends Fragment {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
     }
 }

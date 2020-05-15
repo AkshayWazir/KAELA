@@ -6,14 +6,6 @@ public class AdaUnsQueObj {
     public AdaUnsQueObj() {
     }
 
-    public AdaUnsQueObj(String ques, String desc, String name, String id, String quesId) {
-        this.ques = ques;
-        this.desc = desc;
-        this.name = name;
-        this.id = id;
-        this.quesId = quesId;
-    }
-
     public String getQues() {
         return ques;
     }

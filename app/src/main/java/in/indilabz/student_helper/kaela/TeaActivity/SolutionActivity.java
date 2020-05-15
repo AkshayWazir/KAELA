@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,11 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.zolad.zoominimageview.ZoomInImageView;
 
@@ -33,11 +32,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Adapters.AdaTeaSols;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
+import in.indilabz.student_helper.kaela.StudentActivities.AskActivityQuestion;
 import in.indilabz.student_helper.kaela.TeaActivity.adapter.SolutionMainAda;
 import in.indilabz.student_helper.kaela.TeaActivity.moTea.Sol_moob;
 
@@ -52,7 +52,7 @@ public class SolutionActivity extends AppCompatActivity {
     JSONObject objects;
     ProgressBar bar;
     Bitmap decodedByte;
-
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,11 @@ public class SolutionActivity extends AppCompatActivity {
                 pSList(objects);
             }
         });
-        SharedPreferences preferences = getSharedPreferences("USERS", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("USER", MODE_PRIVATE);
+        if (preferences.getInt("TYPE", 0) == 1) {
+            solve.setVisibility(View.VISIBLE);
+        }
+
         teacher_id = preferences.getString("TEACH_ID", "");
         setupQuestiom(getIntent().getStringExtra("QUES_ID"));
     }
@@ -89,6 +93,10 @@ public class SolutionActivity extends AppCompatActivity {
                             String success = objects.getString("result");
                             if (success.equals("1")) {
 
+                                for (int i = 0; i < 1; i++) {
+                                    System.out.println(i);
+                                }
+
                                 title.setText(objects.getJSONObject("ques").getString("ques_title"));
                                 des.setText(objects.getJSONObject("ques").getString("ques_desc"));
                                 quesImageStr = objects.getJSONObject("ques").getString("image");
@@ -100,16 +108,24 @@ public class SolutionActivity extends AppCompatActivity {
                                             .load(decodedByte)
                                             .into(imageView);
                                     imageView.setVisibility(View.VISIBLE);
+                                    imageView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            raiseDialog(decodedByte);
+                                        }
+                                    });
                                 }
                                 ArrayList<Sol_moob> container = new ArrayList<>();
                                 for (int i = 0; i < objects.getJSONArray("dat").length(); i++) {
                                     JSONObject obj = objects.getJSONArray("dat").getJSONObject(i);
+
                                     Sol_moob moob = new Sol_moob();
                                     moob.setName(obj.getString("name"));
                                     moob.setDesc(obj.getString("description"));
                                     moob.setDesig(obj.getString("exp"));
                                     String imgSol = obj.getString("image");
                                     String imgPro = obj.getString("tea_propic");
+
                                     if (!imgSol.equals("")) {
                                         byte[] decodedString = Base64.decode(imgSol, Base64.DEFAULT);
                                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -118,13 +134,12 @@ public class SolutionActivity extends AppCompatActivity {
                                     if (!imgPro.equals("")) {
                                         byte[] dsPro = Base64.decode(imgPro, Base64.DEFAULT);
                                         Bitmap dbPro = BitmapFactory.decodeByteArray(dsPro, 0, dsPro.length);
-                                        moob.setSolPic(dbPro);
+                                        moob.setProPic(dbPro);
                                     }
                                     container.add(moob);
                                 }
                                 setup_sols(container);
                                 bar.setVisibility(View.GONE);
-                                solve.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -146,8 +161,7 @@ public class SolutionActivity extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     void setup_sols(ArrayList<Sol_moob> objs) {
@@ -169,4 +183,13 @@ public class SolutionActivity extends AppCompatActivity {
         startActivity(inte);
     }
 
+    private void raiseDialog(Bitmap bitmap) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(SolutionActivity.this);
+        final View view1 = getLayoutInflater().inflate(R.layout.full_img_view, null);
+        ZoomInImageView viewImage = view1.findViewById(R.id.img_show_id);
+        viewImage.setImageBitmap(bitmap);
+        alert.setView(view1);
+        alertDialog = alert.create();
+        alertDialog.show();
+    }
 }

@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.R;
 
 import java.util.HashMap;
@@ -148,7 +149,6 @@ public class FragChildSignup extends Fragment {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
     }
 }

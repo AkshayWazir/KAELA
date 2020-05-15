@@ -35,6 +35,7 @@ import java.util.Objects;
 import in.indilabz.student_helper.kaela.Adapters.TeacherAdapter;
 import in.indilabz.student_helper.kaela.Interfaces.AskQuestion;
 import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
@@ -114,8 +115,7 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this));
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     @Override

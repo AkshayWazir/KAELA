@@ -1,6 +1,6 @@
-package in.indilabz.student_helper.kaela.TeacherFragments;
+package in.indilabz.student_helper.kaela.StudentFragments;
 
-
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,95 +32,46 @@ import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
 import in.indilabz.student_helper.kaela.ModelObjects.AdaUnsQueObj;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
-import in.indilabz.student_helper.kaela.TeacherFragments.adptersTeach.AdaSolQue;
 import in.indilabz.student_helper.kaela.TeacherFragments.adptersTeach.AdaUnsQue;
 
-import static android.content.Context.MODE_PRIVATE;
-
-
-public class QuestioningPannel extends Fragment {
-    private RecyclerView unRecView, soRecView;
-    private AdaSolQue ada1;
-    private AdaUnsQue ada2;
+public class FragShowSol extends Fragment {
     private QuesInter ctx;
-    private BubbleNavigationConstraintView bottomNav;
+    private AdaUnsQue adapter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View layout = inflater.inflate(R.layout.fragment_frag_show_sol, container, false);
+        RecyclerView recyclerView = layout.findViewById(R.id.id_stu_sol);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new AdaUnsQue(getContext());
+        adapter.setInteract(ctx);
+        recyclerView.setAdapter(adapter);
+        SharedPreferences preferences = getContext().getSharedPreferences("USER", Context.MODE_PRIVATE);
+        setupAdas(preferences.getString("EMAIL", ""));
+        return layout;
+    }
 
     public void setCtx(QuesInter ctx) {
         this.ctx = ctx;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_questioning_pannel, container, false);
-        unRecView = view.findViewById(R.id.id_unsolved);
-        soRecView = view.findViewById(R.id.id_solved);
-        bottomNav = view.findViewById(R.id.id_tea_ask_bar);
-
-        soRecView.setLayoutManager(new LinearLayoutManager(getContext()));
-        unRecView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        ada1 = new AdaSolQue(getContext());
-        ada2 = new AdaUnsQue(getContext());
-
-        ada1.setInteract(ctx);
-        ada2.setInteract(ctx);
-
-        unRecView.setAdapter(ada2);
-        soRecView.setAdapter(ada1);
-
-
-        SharedPreferences sharedPref = Objects.requireNonNull(getContext()).getSharedPreferences("USER", MODE_PRIVATE);
-        String mail = sharedPref.getString("TEACH_ID", "");
-        setupAdas(mail);
-
-        if (savedInstanceState == null) {
-            bottomNav.setCurrentActiveItem(0);
-            unRecView.setVisibility(View.VISIBLE);
-        }
-
-        bottomNav.setNavigationChangeListener(new BubbleNavigationChangeListener() {
-            @Override
-            public void onNavigationChanged(View view, int position) {
-                switch (position) {
-                    case (0):
-                        unRecView.setVisibility(View.VISIBLE);
-                        soRecView.setVisibility(View.GONE);
-                        break;
-                    case (1):
-                        unRecView.setVisibility(View.GONE);
-                        soRecView.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-        });
-        return view;
-    }
-
-    private void setupAdas(final String teacherId) {
+    private void setupAdas(final String studentId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.SOLVED_UNSOLVED_FETCH,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-
                             ArrayList<AdaUnsQueObj> unsolvQues = new ArrayList<>();
-                            ArrayList<AdaUnsQueObj> solvQues = new ArrayList<>();
-
                             String success = jsonObject.getString("result");
-
                             if (!success.equals("-1")) {
                                 for (int i = 0; i < jsonObject.getJSONArray("dat").length(); i++) {
                                     JSONObject obj = jsonObject.getJSONArray("dat").getJSONObject(i);
-                                    if (!obj.getString("solved").equals("-1")) {
-                                        solvQues.add(getObj(obj)); // returns the Object
-                                    } else {
-                                        unsolvQues.add(getObj(obj));
-                                    }
+                                    unsolvQues.add(getObj(obj));
                                 }
-                                ada1.setObjects(solvQues);
-                                ada2.setObjects(unsolvQues);
+                                adapter.setObjects(unsolvQues);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getContext(), "Failed TO Load " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -138,8 +87,8 @@ public class QuestioningPannel extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("teach_id", teacherId);
-                params.put("CONTEXT","0");
+                params.put("stu_id", studentId);
+                params.put("CONTEXT", "1");
                 return params;
             }
         };
@@ -156,5 +105,4 @@ public class QuestioningPannel extends Fragment {
         obj1.setName(obj.getString("stu_name"));
         return obj1;
     }
-
 }

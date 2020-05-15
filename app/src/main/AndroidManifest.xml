@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TeaActivity.SolutionActivity"></activity>
+        <activity android:name=".TeaActivity.SolutionActivity"
+            android:label="Question and Answers"/>
         <activity
             android:name=".TeaActivity.SubSelcActivity"
             android:label="Select The Subjects" />

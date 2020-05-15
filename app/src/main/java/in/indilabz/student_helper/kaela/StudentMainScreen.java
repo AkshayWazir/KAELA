@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +16,18 @@ import androidx.fragment.app.FragmentManager;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 
+import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
 import in.indilabz.student_helper.kaela.Interfaces.StuFraInt;
 import in.indilabz.student_helper.kaela.StudentActivities.ShowTeachers;
 import in.indilabz.student_helper.kaela.StudentFragments.FragGroup;
 import in.indilabz.student_helper.kaela.StudentFragments.FragMainStu;
+import in.indilabz.student_helper.kaela.StudentFragments.FragShowSol;
+import in.indilabz.student_helper.kaela.TeaActivity.SolutionActivity;
 
-public class StudentMainScreen extends AppCompatActivity implements StuFraInt {
+public class StudentMainScreen extends AppCompatActivity implements StuFraInt, QuesInter {
     FragMainStu main;
     FragGroup groups;
+    FragShowSol solFrag;
     BubbleNavigationConstraintView navBar;
 
 
@@ -35,6 +38,8 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt {
         navBar = findViewById(R.id.navBar);
         main = new FragMainStu();
         main.setInteract(this);
+        solFrag = new FragShowSol();
+        solFrag.setCtx(this);
         groups = new FragGroup();
         if (savedInstanceState == null) {
             FragmentManager manager = getSupportFragmentManager();
@@ -57,7 +62,9 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt {
                                 .commit();
                         break;
                     case (2):
-                        Toast.makeText(StudentMainScreen.this, "Chat Tapped", Toast.LENGTH_SHORT).show();
+                        manager1.beginTransaction()
+                                .replace(R.id.frame_container_stu, solFrag)
+                                .commit();
                         break;
                 }
             }
@@ -95,4 +102,10 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void quesSelected(String quesId) {
+        Intent intent = new Intent(this, SolutionActivity.class);
+        intent.putExtra("QUES_ID", quesId);
+        startActivity(intent);
+    }
 }

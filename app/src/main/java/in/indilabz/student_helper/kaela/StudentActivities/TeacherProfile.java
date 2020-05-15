@@ -44,6 +44,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.indilabz.student_helper.kaela.Adapters.StudentReviewAdapter;
 import in.indilabz.student_helper.kaela.ModelObjects.ReviewObject;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
@@ -261,8 +262,7 @@ public class TeacherProfile extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(request);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
     @Override

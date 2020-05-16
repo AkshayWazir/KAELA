@@ -66,7 +66,6 @@ public class TeacherProfile extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         connect_count = findViewById(R.id.textView36);
-        review_count = findViewById(R.id.textView37);
         teach_name = findViewById(R.id.textView30);
         teach_desig = findViewById(R.id.textView32);
         stuReview = findViewById(R.id.cardView_stuReview);
@@ -225,7 +224,7 @@ public class TeacherProfile extends AppCompatActivity {
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
-    void startImageUpload(){
+    void startImageUpload() {
         StringRequest request = new StringRequest(Request.Method.POST, PublicLinks.UPDATE_PROPIC_TEACHER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

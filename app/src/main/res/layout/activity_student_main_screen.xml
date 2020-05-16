@@ -64,7 +64,7 @@
             android:layout_height="50sp"
             app:bt_colorActive="@color/color5"
             app:bt_colorInactive="@color/color3"
-            app:bt_icon="@drawable/ic_chat"
+            app:bt_icon="@drawable/ic_solution"
             app:bt_iconHeight="24dp"
             app:bt_iconWidth="24dp"
             app:bt_shape="@drawable/back1_bottom"

@@ -124,7 +124,7 @@ public class AskActivityQuestion extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && data != null) {
-            Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
+            bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(bitmap);
         } else if (requestCode == 1 && data != null) {

@@ -9,16 +9,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_stuReview"
-        android:layout_width="50sp"
+        android:layout_width="50dp"
         android:layout_height="50sp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/color5"
         android:fadingEdgeLength="5sp"
         app:cardCornerRadius="25sp"
         app:cardElevation="7sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView21">
 
         <ImageView
             android:id="@+id/imageView"
@@ -92,20 +92,9 @@
         android:fontFamily="sans-serif-medium"
         android:text="CONNECTIONS"
         android:textColor="#000"
+        app:layout_constraintEnd_toStartOf="@+id/cardView_stuReview"
         app:layout_constraintStart_toEndOf="@+id/circleImageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView21" />
-
-    <TextView
-        android:id="@+id/textView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="REVIEWS"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView34"
-        app:layout_constraintTop_toTopOf="@+id/textView34" />
 
     <TextView
         android:id="@+id/textView36"
@@ -119,17 +108,6 @@
         app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
-
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="400"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="@+id/textView35"
-        app:layout_constraintStart_toStartOf="@+id/textView35"
-        app:layout_constraintTop_toTopOf="@+id/textView36" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewewview"

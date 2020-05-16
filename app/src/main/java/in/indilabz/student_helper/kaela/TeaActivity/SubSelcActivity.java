@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Interfaces.TeaSelecInter;
+import in.indilabz.student_helper.kaela.IntroductionActivity;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 import in.indilabz.student_helper.kaela.TeaActivity.adapter.SubSelecAdapter;
@@ -183,12 +184,11 @@ public class SubSelcActivity extends AppCompatActivity implements TeaSelecInter 
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            for (int i = 0; i < 2; i++) {
-                                System.out.println(i);
-                            }
+
                             String success = jsonObject.getString("RESPONSE");
                             if (!success.equals("-1")) {
-                                startActivity(new Intent(getApplicationContext(), TeacherMainScreen.class));
+                                startActivity(new Intent(getApplicationContext(), IntroductionActivity.class));
+                                Toast.makeText(SubSelcActivity.this, "Login Again With The ID & Password", Toast.LENGTH_LONG).show();
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Update Failed", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package in.indilabz.student_helper.kaela;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
@@ -33,6 +35,7 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introduction);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         fragContainer = findViewById(R.id.frame_layout_id);
         intCard = findViewById(R.id.intro_cardview);
         animationSequence1();

@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,8 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
@@ -29,7 +36,11 @@ import com.zolad.zoominimageview.ZoomInImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +48,6 @@ import in.indilabz.student_helper.kaela.Adapters.AdaTeaSols;
 import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
-import in.indilabz.student_helper.kaela.StudentActivities.AskActivityQuestion;
 import in.indilabz.student_helper.kaela.TeaActivity.adapter.SolutionMainAda;
 import in.indilabz.student_helper.kaela.TeaActivity.moTea.Sol_moob;
 
@@ -93,9 +103,6 @@ public class SolutionActivity extends AppCompatActivity {
                             String success = objects.getString("result");
                             if (success.equals("1")) {
 
-                                for (int i = 0; i < 1; i++) {
-                                    System.out.println(i);
-                                }
 
                                 title.setText(objects.getJSONObject("ques").getString("ques_title"));
                                 des.setText(objects.getJSONObject("ques").getString("ques_desc"));
@@ -112,6 +119,7 @@ public class SolutionActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
                                             raiseDialog(decodedByte);
+
                                         }
                                     });
                                 }
@@ -150,8 +158,17 @@ public class SolutionActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_LONG).show();
-                        finish();
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Toast.makeText(getApplicationContext(), "Request Timeout", Toast.LENGTH_LONG).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(getApplicationContext(), "Auth Failure", Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_LONG).show();
+                        } else if (error instanceof NetworkError) {
+                            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(getApplicationContext(), "Parse Error", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }) {
             @Override

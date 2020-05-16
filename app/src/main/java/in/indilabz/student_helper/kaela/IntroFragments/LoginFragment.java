@@ -122,6 +122,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getContext().getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
+                        updateui(false);
                     }
                 }) {
             @Override

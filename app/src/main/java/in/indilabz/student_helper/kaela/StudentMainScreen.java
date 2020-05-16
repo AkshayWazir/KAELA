@@ -104,6 +104,9 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt, Q
 
     @Override
     public void quesSelected(String quesId) {
+        for (int i = 0; i < 1; i++) {
+            System.out.println(i);
+        }
         Intent intent = new Intent(this, SolutionActivity.class);
         intent.putExtra("QUES_ID", quesId);
         startActivity(intent);

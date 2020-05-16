@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,7 +45,7 @@ import in.indilabz.student_helper.kaela.R;
 public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     RecyclerView recyclerView;
     ArrayList<String> teachersId;
-    Button submit_btn;
+    CardView submit_btn;
     TeacherAdapter adapter;
     ProgressBar bar;
 

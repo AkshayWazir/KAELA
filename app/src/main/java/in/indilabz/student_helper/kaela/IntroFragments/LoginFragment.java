@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -15,7 +16,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +36,7 @@ import in.indilabz.student_helper.kaela.R;
 public class LoginFragment extends Fragment {
     private FragInteract interact;
     private View view;
+    FirebaseAuth mAuth;
 
     public void setInteract(FragInteract interact) {
         this.interact = interact;
@@ -39,6 +45,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login, container, false);
+        mAuth = FirebaseAuth.getInstance();
 
         view.findViewById(R.id.cardView12)
                 .setOnClickListener(new View.OnClickListener() {
@@ -85,7 +92,7 @@ public class LoginFragment extends Fragment {
 
     private void verifyLogin(final String[] object) {
         updateui(true);
-        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
+        final StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, PublicLinks.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -133,6 +140,18 @@ public class LoginFragment extends Fragment {
                 return params;
             }
         };
-        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+        mAuth.signInWithEmailAndPassword(object[0], object[1])
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getContext(), "Setting Up Your Data", Toast.LENGTH_LONG).show();
+                            MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                        } else {
+                            Toast.makeText(getContext(), "User don't Exists", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
     }
 }

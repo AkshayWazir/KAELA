@@ -41,7 +41,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ClassObj
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ClassObjectHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ClassObjectHolder holder, final int position) {
         holder.title.setText(objects.get(position).getTitle());
         holder.rcView.setLayoutManager(new GridLayoutManager(context, 2));
         holder.rcView.setHasFixedSize(true);

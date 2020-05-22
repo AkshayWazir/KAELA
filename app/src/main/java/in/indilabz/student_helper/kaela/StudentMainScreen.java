@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
 import in.indilabz.student_helper.kaela.Interfaces.StuFraInt;
@@ -91,10 +92,10 @@ public class StudentMainScreen extends AppCompatActivity implements StuFraInt, Q
             case (R.id.id_logout):
                 SharedPreferences prefs = this.getSharedPreferences("USER", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
-
                 editor.putString("NAME", "");
                 editor.putString("EMAIL", "");
                 editor.putInt("TYPE", -1);
+                FirebaseAuth.getInstance().signOut();
                 editor.commit();
                 startActivity(new Intent(this, IntroductionActivity.class));
                 finish();

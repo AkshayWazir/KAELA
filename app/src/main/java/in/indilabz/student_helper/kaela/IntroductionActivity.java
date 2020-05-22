@@ -14,8 +14,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
-import in.indilabz.student_helper.kaela.IntroFragments.FragChildSignup;
-import in.indilabz.student_helper.kaela.IntroFragments.FragTeacherSignup;
+import in.indilabz.student_helper.kaela.IntroFragments.SignUpStuFrag;
+import in.indilabz.student_helper.kaela.IntroFragments.SignupTeachFrag;
 import in.indilabz.student_helper.kaela.IntroFragments.FragmentChooseSignup;
 import in.indilabz.student_helper.kaela.IntroFragments.IntroScreenFrag;
 import in.indilabz.student_helper.kaela.IntroFragments.LoginFragment;
@@ -82,13 +82,13 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
                 transaction.commit();
                 break;
             case (3):
-                FragChildSignup temp1 = new FragChildSignup();
+                SignUpStuFrag temp1 = new SignUpStuFrag();
                 temp1.setInteract(this);
                 transaction.replace(R.id.frame_layout_id, temp1);
                 transaction.commit();
                 break;
             case (4):
-                FragTeacherSignup temp2 = new FragTeacherSignup();
+                SignupTeachFrag temp2 = new SignupTeachFrag();
                 temp2.setInteract(this);
                 transaction.replace(R.id.frame_layout_id, temp2);
                 transaction.commit();

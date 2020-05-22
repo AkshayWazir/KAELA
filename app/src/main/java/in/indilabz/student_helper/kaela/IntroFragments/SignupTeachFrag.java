@@ -9,33 +9,38 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Interfaces.FragInteract;
 import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 
-public class FragTeacherSignup extends Fragment {
+public class SignupTeachFrag extends Fragment {
     private FragInteract interact;
     private View view;
     private ProgressBar bar;
+    FirebaseAuth mAuth;
 
     public void setInteract(FragInteract interact) {
         this.interact = interact;
@@ -51,6 +56,7 @@ public class FragTeacherSignup extends Fragment {
                 interact.navigateToFragment(2);
             }
         });
+        mAuth = FirebaseAuth.getInstance();
 
         view.findViewById(R.id.cardView5).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,5 +154,34 @@ public class FragTeacherSignup extends Fragment {
             }
         };
         MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
+        mAuth.createUserWithEmailAndPassword(objects[2], objects[3])
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(objects[0])
+                                .build();
+                        currentUser.updateProfile(profileUpdates)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getContext(), "User Info Updated", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+                                    }
+                                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Failed TO Upload", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -45,8 +45,9 @@ public class TeacherMainScreen extends AppCompatActivity implements QuesInter {
                 switch (position) {
                     case (0):
                         startActivity(new Intent(getApplicationContext(), TeacherProfile.class));
+                        bottomNav.setCurrentActiveItem(2);
                         break;
-                    case(2):
+                    case(1):
                         FragmentManager manager = getSupportFragmentManager();
                         manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
                         break;

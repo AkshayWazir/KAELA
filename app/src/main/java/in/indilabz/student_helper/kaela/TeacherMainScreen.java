@@ -1,5 +1,8 @@
 package in.indilabz.student_helper.kaela;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +19,17 @@ import androidx.fragment.app.FragmentManager;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
+import in.indilabz.student_helper.kaela.Services.TeacherJobScheduler;
+import in.indilabz.student_helper.kaela.Services.TeacherServices;
 import in.indilabz.student_helper.kaela.StudentActivities.TeacherProfile;
 import in.indilabz.student_helper.kaela.TeaActivity.SolutionActivity;
 import in.indilabz.student_helper.kaela.TeacherFragments.QuestioningPannel;
@@ -47,13 +59,29 @@ public class TeacherMainScreen extends AppCompatActivity implements QuesInter {
                         startActivity(new Intent(getApplicationContext(), TeacherProfile.class));
                         bottomNav.setCurrentActiveItem(2);
                         break;
-                    case(1):
+                    case (1):
                         FragmentManager manager = getSupportFragmentManager();
                         manager.beginTransaction().replace(R.id.frame_teach_container, FragAskQuestion).commit();
                         break;
                 }
             }
         });
+
+
+        ComponentName componentName = new ComponentName(this, TeacherJobScheduler.class);
+        JobInfo info = new JobInfo.Builder(123, componentName)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int result = scheduler.schedule(info);
+        if (result == JobScheduler.RESULT_SUCCESS) {
+            Toast.makeText(this, "Schedudled", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent serviceIntent = new Intent(this, TeacherServices.class);
+            TeacherServices.enqueWork(this, serviceIntent);
+            Toast.makeText(this, "Lower Job", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

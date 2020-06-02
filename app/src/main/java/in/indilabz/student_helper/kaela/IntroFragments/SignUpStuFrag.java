@@ -163,7 +163,7 @@ public class SignUpStuFrag extends Fragment {
                         FirebaseUser currentUser = mAuth.getCurrentUser();
 
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(object[0])
+                                .setDisplayName(object[3])
                                 .build();
                         currentUser.updateProfile(profileUpdates)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

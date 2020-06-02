@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +40,8 @@ public class LoginFragment extends Fragment {
     private FragInteract interact;
     private View view;
     FirebaseAuth mAuth;
+    TextView forgotPass;
+    AlertDialog alertDialog;
 
     public void setInteract(FragInteract interact) {
         this.interact = interact;
@@ -46,7 +51,13 @@ public class LoginFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login, container, false);
         mAuth = FirebaseAuth.getInstance();
-
+        forgotPass = view.findViewById(R.id.textView5);
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                raiseDialog();
+            }
+        });
         view.findViewById(R.id.cardView12)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -66,6 +77,34 @@ public class LoginFragment extends Fragment {
                     }
                 });
         return view;
+    }
+
+
+    public void raiseDialog() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        final View view1 = getLayoutInflater().inflate(R.layout.pass_reset_promt, null);
+        CardView proceed = view1.findViewById(R.id.id_change);
+        final TextInputLayout mail = view1.findViewById(R.id.textInputLayout14);
+        alert.setView(view1);
+        alertDialog = alert.create();
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String emailAddress = mail.getEditText().getText().toString();
+                auth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Password Reset Mail Sent", Toast.LENGTH_LONG).show();
+                                    alertDialog.dismiss();
+                                }
+                            }
+                        });
+            }
+        });
+        alertDialog.show();
     }
 
     private void updateui(boolean state) {
@@ -136,7 +175,6 @@ public class LoginFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("mail", object[0]);
-                params.put("pass", object[1]);
                 return params;
             }
         };
@@ -149,6 +187,7 @@ public class LoginFragment extends Fragment {
                             MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
                         } else {
                             Toast.makeText(getContext(), "User don't Exists", Toast.LENGTH_LONG).show();
+                            updateui(false);
                         }
                     }
                 });

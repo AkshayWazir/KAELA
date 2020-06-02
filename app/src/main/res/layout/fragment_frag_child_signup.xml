@@ -19,17 +19,25 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.8" />
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:contentDescription="@string/todo"
-            android:padding="8sp"
-            android:src="@drawable/ic_backbtn"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/color5"
+            app:cardCornerRadius="50sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/todo"
+                android:padding="8sp"
+                android:src="@drawable/ic_backbtn" />
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout3"

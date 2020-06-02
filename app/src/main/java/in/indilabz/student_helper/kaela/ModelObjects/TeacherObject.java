@@ -1,7 +1,7 @@
 package in.indilabz.student_helper.kaela.ModelObjects;
 
 public class TeacherObject {
-    private String imgUrl, name, designation, connections, id;
+    private String imgUrl, name, designation, connections, id, mail;
     private boolean selected;
 
     public TeacherObject() {
@@ -15,13 +15,22 @@ public class TeacherObject {
         this.selected = selected;
     }
 
-    public TeacherObject(String imgUrl, String name, String designation, String connections, String id) {
+    public TeacherObject(String imgUrl, String name, String designation, String connections, String id, String mail) {
         this.imgUrl = imgUrl;
         this.name = name;
         this.designation = designation;
         this.connections = connections;
         this.id = id;
         selected = false;
+        this.mail = mail;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getId() {

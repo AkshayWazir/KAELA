@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +22,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 import com.zolad.zoominimageview.ZoomInImageView;
 
 import org.json.JSONException;
@@ -52,6 +56,7 @@ public class AskActivityQuestion extends AppCompatActivity {
     Bitmap bitmap;
     AlertDialog alertDialog;
     StringBuilder builder;
+    ArrayList<String> teachMails;
 
 
     @Override
@@ -59,7 +64,10 @@ public class AskActivityQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
         Intent intent = getIntent();
+
         ArrayList<String> tta = intent.getStringArrayListExtra("TEACHER_ID");
+        teachMails = intent.getStringArrayListExtra("TEACHER_MAILS");
+
         builder = new StringBuilder();
         if (tta != null) {
             for (String s : tta) {
@@ -161,6 +169,7 @@ public class AskActivityQuestion extends AppCompatActivity {
                 view.setEnabled(false);
                 uploadImage();
                 view1.findViewById(R.id.progressBar5).setVisibility(View.VISIBLE);
+                beginResponse();
             }
         });
         notNow.setOnClickListener(new View.OnClickListener() {
@@ -176,9 +185,6 @@ public class AskActivityQuestion extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, PublicLinks.UPLOAD_QUESTION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                for (int i = 0; i < 2; i++) {
-                    System.out.println(i);
-                }
                 try {
                     JSONObject object = new JSONObject(response);
                     String response1 = object.getString("RESPONSE");
@@ -228,9 +234,25 @@ public class AskActivityQuestion extends AppCompatActivity {
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
-
     private String getTempId() {
         Date currentTime = Calendar.getInstance().getTime();
         return currentTime.toString();
+    }
+
+    private void beginResponse() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("NOTIFY", true);
+        WriteBatch batch = FirebaseFirestore.getInstance().batch();
+        for (String i : teachMails) {
+            DocumentReference reference = FirebaseFirestore.getInstance().collection("EVENTS").document(i);
+            batch.set(reference, map);
+        }
+        batch.commit()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(AskActivityQuestion.this, "Teachers Notified", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

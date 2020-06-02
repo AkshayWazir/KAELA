@@ -23,7 +23,6 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/reciever_back"
-        android:elevation="3sp"
         android:fadingEdgeLength="5sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

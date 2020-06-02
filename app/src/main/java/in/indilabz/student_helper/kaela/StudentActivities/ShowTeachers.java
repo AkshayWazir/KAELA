@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -45,6 +44,7 @@ import in.indilabz.student_helper.kaela.R;
 public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     RecyclerView recyclerView;
     ArrayList<String> teachersId;
+    ArrayList<String> teacherMail;
     CardView submit_btn;
     TeacherAdapter adapter;
     ProgressBar bar;
@@ -68,12 +68,14 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         teachersId = new ArrayList<>();
+        teacherMail = new ArrayList<>();
         submit_btn.setVisibility(View.INVISIBLE);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AskActivityQuestion.class);
                 intent.putExtra("TEACHER_ID", teachersId);
+                intent.putExtra("TEACHER_MAILS", teacherMail);
                 startActivity(intent);
             }
         });
@@ -92,7 +94,7 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                                 JSONObject object = new JSONObject(response);
                                 for (int i = 0; i < object.getJSONArray("dat").length(); i++) {
                                     JSONObject obj = object.getJSONArray("dat").getJSONObject(i);
-                                    objects.add(new TeacherObject("", obj.getString("name"), obj.getString("exp"), obj.getString("connections"), obj.getString("tea_id")));
+                                    objects.add(new TeacherObject("", obj.getString("name"), obj.getString("exp"), obj.getString("connections"), obj.getString("tea_id"), obj.getString("mail")));
                                 }
                                 bar.setVisibility(View.GONE);
                                 adapter.setObjects(objects);
@@ -155,14 +157,16 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     }
 
     @Override
-    public void selectTeacher(String teachId) {
+    public void selectTeacher(String teachId, String mail) {
         teachersId.add(teachId);
+        teacherMail.add(mail);
         submit_btn.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void removeTeacher(String teachId) {
+    public void removeTeacher(String teachId, String mail) {
         teachersId.remove(teachId);
+        teacherMail.remove(mail);
         if (teachersId.size() == 0) {
             submit_btn.setVisibility(View.INVISIBLE);
         }

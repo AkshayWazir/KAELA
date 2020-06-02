@@ -17,13 +17,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,13 +61,16 @@ public class SignupTeachFrag extends Fragment {
         });
         mAuth = FirebaseAuth.getInstance();
 
+        // her We Specify Service
+
+
         view.findViewById(R.id.cardView5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateContent()) {
                     String[] result = getResultantString();
                     updateUi(true);
-                    registerUser(result);
+                    signUpFirebase(result);
                 } else {
                     Toast.makeText(getContext(), "Some Fields are empty", Toast.LENGTH_SHORT).show();
                 }
@@ -123,8 +129,9 @@ public class SignupTeachFrag extends Fragment {
                                 editor.putString("EMAIL", objects[2]);
                                 editor.putInt("TYPE", 1);
                                 editor.commit();
-                                interact.registerComplete(1);
+
                                 Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                                interact.registerComplete(1);
                             } else {
                                 updateUi(false);
                                 Toast.makeText(getContext(), "Failed to write Data", Toast.LENGTH_SHORT).show();
@@ -154,34 +161,57 @@ public class SignupTeachFrag extends Fragment {
             }
         };
         MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    void signUpFirebase(final String[] objects) {
         mAuth.createUserWithEmailAndPassword(objects[2], objects[3])
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser currentUser = mAuth.getCurrentUser();
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("NOTIFY", false);
+                        FirebaseFirestore.getInstance()
+                                .collection("EVENTS")
+                                .document(objects[2])
+                                .set(map)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(getContext(), "Notifier Added", Toast.LENGTH_SHORT).show();
 
+                                        }
+
+                                    }
+                                });
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(objects[0])
                                 .build();
-                        currentUser.updateProfile(profileUpdates)
+                        currentUser
+                                .updateProfile(profileUpdates)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(getContext(), "User Info Updated", Toast.LENGTH_SHORT).show();
+                                        registerUser(objects);
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
+                                        updateUi(false);
                                     }
                                 });
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "Failed TO Upload", Toast.LENGTH_SHORT).show();
-            }
-        });
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed TO Upload", Toast.LENGTH_SHORT).show();
+                        updateUi(false);
+                    }
+                });
     }
 }

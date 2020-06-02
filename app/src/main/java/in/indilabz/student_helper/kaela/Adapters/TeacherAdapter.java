@@ -56,11 +56,11 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.teachVie
                     @Override
                     public void onClick(View view) {
                         if (!objects.get(position).isSelected()) {
-                            question.selectTeacher(objects.get(position).getId());
+                            question.selectTeacher(objects.get(position).getId(), objects.get(position).getMail());
                             holder.check.setImageResource(R.drawable.tick);
                             objects.get(position).setSelected(true);
                         } else {
-                            question.removeTeacher(objects.get(position).getId());
+                            question.removeTeacher(objects.get(position).getId(), objects.get(position).getMail());
                             holder.check.setImageResource(R.drawable.hollo_cirle);
                             objects.get(position).setSelected(false);
                         }

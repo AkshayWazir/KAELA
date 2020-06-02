@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatSystem.ChatScreen"></activity>
+        <activity
+            android:name=".ChatSystem.ChatScreen"
+            android:label="Discussion" />
         <activity
             android:name=".TeaActivity.SolutionActivity"
             android:label="Question and Answers" />

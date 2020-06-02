@@ -13,4 +13,5 @@ public class PublicLinks {
     public static String TEACH_PROFILE = "https://pedir.in/register_user/fetch_teach_profile.php";
     public static String SUBMIT_REVIEW = "https://pedir.in/register_user/submit_review.php";
     public static String UPDATE_PROPIC_TEACHER = "https://pedir.in/register_user/tea_data_update.php";
+    public static String ADD_TO_SOLVED = "https://pedir.in/register_user/ques_solved.php";
 }

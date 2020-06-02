@@ -3,8 +3,9 @@ package in.indilabz.student_helper.kaela.TeaActivity.moTea;
 import android.graphics.Bitmap;
 
 public class Sol_moob {
-    private String name, desig, desc;
+    private String name, desig, desc, sol_id;
     private Bitmap proPic, solPic;
+    boolean accepted;
 
     public Sol_moob() {
     }
@@ -15,6 +16,23 @@ public class Sol_moob {
         this.desc = desc;
         this.proPic = proPic;
         this.solPic = solPic;
+        this.accepted = false;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public String getSol_id() {
+        return sol_id;
+    }
+
+    public void setSol_id(String sol_id) {
+        this.sol_id = sol_id;
     }
 
     public String getName() {

@@ -113,9 +113,7 @@ public class QuestioningPannel extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            for (int i =0;i<1;i++){
-                                System.out.println(i);
-                            }
+
                             JSONObject jsonObject = new JSONObject(response);
 
                             ArrayList<AdaUnsQueObj> unsolvQues = new ArrayList<>();

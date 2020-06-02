@@ -3,8 +3,11 @@ package in.indilabz.student_helper.kaela.ChatSystem.RecyCont;
 public class MessObj {
     private String message;
     private String senderId, receiverId;
-    private String imageUrl;
+    private String imageUrl = "";
     private String sendName;
+
+    public MessObj() {
+    }
 
     public MessObj(String message, String senderId, String receiverId, String sendName) {
         this.message = message;

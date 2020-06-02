@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8sp"
@@ -9,8 +10,10 @@
     app:cardElevation="5sp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/select_solution_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_ripple">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView5"
@@ -66,6 +69,17 @@
             app:layout_constraintEnd_toEndOf="@+id/textView75"
             app:layout_constraintStart_toStartOf="@+id/textView75"
             app:layout_constraintTop_toBottomOf="@+id/textView75" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_correct" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -211,7 +211,6 @@ public class TeacherProfile extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-
     }
 
     private String imToSt(Bitmap bitmap) {
@@ -228,9 +227,6 @@ public class TeacherProfile extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, PublicLinks.UPDATE_PROPIC_TEACHER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                for (int i = 0; i < 2; i++) {
-                    System.out.println(i);
-                }
                 try {
                     JSONObject object = new JSONObject(response);
                     String response1 = object.getString("RESPONSE");

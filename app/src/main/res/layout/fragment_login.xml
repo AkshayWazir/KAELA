@@ -128,7 +128,7 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/color5"
             android:fadingEdgeLength="5sp"
-            app:cardCornerRadius="50sp"
+            app:cardCornerRadius="25sp"
             app:cardElevation="7sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

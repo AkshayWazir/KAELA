@@ -39,7 +39,6 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         holder.StudentName.setText(objects.get(position).getStudentName());
         holder.question.setText(objects.get(position).getReview());
-        holder.stuSchool.setText(objects.get(position).getSchool());
     }
 
     @Override
@@ -48,13 +47,12 @@ public class StudentReviewAdapter extends RecyclerView.Adapter<StudentReviewAdap
     }
 
     static class ReviewViewHolder extends RecyclerView.ViewHolder {
-        TextView StudentName, question, stuSchool;
+        TextView StudentName, question;
 
         ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             StudentName = itemView.findViewById(R.id.textView39);
             question = itemView.findViewById(R.id.textView41);
-            stuSchool = itemView.findViewById(R.id.textView77);
         }
     }
 }

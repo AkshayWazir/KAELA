@@ -37,6 +37,7 @@ import java.util.Objects;
 
 import in.indilabz.student_helper.kaela.Interfaces.QuesInter;
 import in.indilabz.student_helper.kaela.ModelObjects.AdaUnsQueObj;
+import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
 import in.indilabz.student_helper.kaela.R;
 import in.indilabz.student_helper.kaela.TeacherFragments.adptersTeach.AdaSolQue;
@@ -51,6 +52,7 @@ public class QuestioningPannel extends Fragment {
     private AdaUnsQue ada2;
     private QuesInter ctx;
     private BubbleNavigationConstraintView bottomNav;
+    StringRequest stringRequest;
 
     public void setCtx(QuesInter ctx) {
         this.ctx = ctx;
@@ -108,7 +110,7 @@ public class QuestioningPannel extends Fragment {
         for (int i =0;i<1;i++){
             System.out.println(i);
         }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.SOLVED_UNSOLVED_FETCH,
+        stringRequest = new StringRequest(Request.Method.POST, PublicLinks.SOLVED_UNSOLVED_FETCH,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -142,6 +144,7 @@ public class QuestioningPannel extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getContext(), "Try Again : " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        raiseAgain();
                     }
                 }) {
             @Override
@@ -185,8 +188,8 @@ public class QuestioningPannel extends Fragment {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-        requestQueue.add(stringRequest);
+
+        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     private AdaUnsQueObj getObj(JSONObject obj) throws JSONException {
@@ -197,6 +200,10 @@ public class QuestioningPannel extends Fragment {
         obj1.setQuesId(obj.getString("ques_id"));
         obj1.setName(obj.getString("stu_name"));
         return obj1;
+    }
+
+    void raiseAgain(){
+        MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
 }

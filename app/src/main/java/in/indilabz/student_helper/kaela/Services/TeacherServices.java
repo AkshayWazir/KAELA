@@ -14,6 +14,7 @@ import androidx.core.app.JobIntentService;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -37,7 +38,6 @@ public class TeacherServices extends JobIntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
     @Override
@@ -61,13 +61,21 @@ public class TeacherServices extends JobIntentService {
                         if (documentSnapshot.exists()) {
                             boolean bool = documentSnapshot.getBoolean("NOTIFY");
                             if (bool) {
+
                                 Map<String, Object> map = new HashMap<>();
                                 map.put("NOTIFY", false);
-                                showNotification();
-                                FirebaseFirestore.getInstance()
+
+                                FirebaseFirestore
+                                        .getInstance()
                                         .collection("EVENTS")
                                         .document(check_destination)
-                                        .set(map);
+                                        .set(map)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                showNotification();
+                                            }
+                                        });
                             }
                         }
                     }
@@ -76,10 +84,13 @@ public class TeacherServices extends JobIntentService {
 
     private void showNotification() {
         Intent intent = new Intent(this, TeacherMainScreen.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationManagerCompat nmc = NotificationManagerCompat.from(getApplicationContext());
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         long[] vibrate = {0, 100, 200, 300};
+
         Notification notification = new NotificationCompat.Builder(getApplicationContext(), "1")
                 .setSmallIcon(R.drawable.ic_mail)
                 .setContentTitle("New Question")
@@ -89,6 +100,7 @@ public class TeacherServices extends JobIntentService {
                 .setSound(alarmSound)
                 .setContentIntent(contentIntent)
                 .build();
+
         nmc.notify(1, notification);
     }
 }

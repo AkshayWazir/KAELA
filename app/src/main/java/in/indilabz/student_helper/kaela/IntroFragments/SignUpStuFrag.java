@@ -17,8 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,6 +51,7 @@ public class SignUpStuFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_frag_child_signup, container, false);
+
         mAuth = FirebaseAuth.getInstance();
         bar = view.findViewById(R.id.progressBar);
         ctx = getContext();
@@ -120,18 +121,18 @@ public class SignUpStuFrag extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("RESPONSE");
                             if (success.equals("1")) {
-
                                 SharedPreferences prefs = ctx.getSharedPreferences("USER", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("NAME", object[0]);
                                 editor.putString("EMAIL", object[1]);
                                 editor.putInt("TYPE", 0);
                                 editor.commit();
-                                interact.registerComplete(0);
-                                Toast.makeText(getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                                fbSignUp(object);
+                                Toast.makeText(getContext(), "DATA Stored", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(ctx, "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ctx, "JSON EXCEPTION : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            updateUI(false);
                         }
                     }
                 },
@@ -156,35 +157,36 @@ public class SignUpStuFrag extends Fragment {
             }
         };
         MySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    void fbSignUp(final String[] object) {
         mAuth.createUserWithEmailAndPassword(object[1], object[2])
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(object[3])
-                                .build();
-                        currentUser.updateProfile(profileUpdates)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(ctx, "User Info Updated", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                    }
-                                });
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(object[3])
+                                    .build();
+                            currentUser
+                                    .updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(ctx, "ID Created FB", Toast.LENGTH_SHORT).show();
+                                                interact.registerComplete(0);
+                                            } else {
+                                                Toast.makeText(ctx, "FB Failed To Create ID ", Toast.LENGTH_SHORT).show();
+                                                updateUI(false);
+                                            }
+                                        }
+                                    });
+                        } else {
+                            updateUI(false);
+                        }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
+                });
     }
 }

@@ -35,6 +35,7 @@ public class IntroductionActivity extends AppCompatActivity implements FragInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introduction);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         fragContainer = findViewById(R.id.frame_layout_id);
         intCard = findViewById(R.id.intro_cardview);

@@ -28,7 +28,7 @@
             android:layout_height="100sp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:src="@drawable/text_image"
+            android:src="@drawable/hack_logo"
             app:civ_border_overlay="false"
             app:civ_border_width="0sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,8 +96,10 @@
             android:layout_height="0sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView19"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView">
+            app:layout_constraintTop_toTopOf="@+id/circleImageView"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/textView31"

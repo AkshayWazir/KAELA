@@ -2,6 +2,7 @@ package in.indilabz.student_helper.kaela.ChatSystem;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +22,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -72,35 +76,42 @@ public class ChatScreen extends AppCompatActivity {
     }
 
     void getMessages() {
-        db.collection(questionId)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot snapshots) {
-                        ArrayList<MessObj> obj = new ArrayList<>();
-                        for (DocumentSnapshot snapshot : snapshots) {
-                            obj.add(snapshot.toObject(MessObj.class));
-                        }
-                        Collections.reverse(obj);
-                        adapter.setMessages(obj);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
+        CollectionReference reference = db.collection(questionId);
+        reference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                ArrayList<MessObj> obj = new ArrayList<>();
+                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                    obj.add(snapshot.toObject(MessObj.class));
+                }
+                Collections.reverse(obj);
+                adapter.setMessages(obj);
+            }
+        });
     }
 
     public void sendMessage(View view) {
         if (tempImage.getVisibility() == View.VISIBLE) {
             uploadFile();
+            tempImage.setVisibility(View.INVISIBLE);
+            tempImage.setImageBitmap(null);
+            message.getEditText().setText("");
         } else {
-            MessObj object = new MessObj(message.getEditText().getText().toString(),
-                    mAuth.getCurrentUser().getEmail(),
-                    questionId,
-                    mAuth.getCurrentUser().getDisplayName());
+            SharedPreferences preferences = getSharedPreferences("USER", MODE_PRIVATE);
+            String stu = preferences.getString("TYPE", "0");
+            MessObj object;
+            if (stu.equals("0")) {
+                object = new MessObj(message.getEditText().getText().toString(),
+                        mAuth.getCurrentUser().getEmail(),
+                        questionId,
+                        preferences.getString("NAME", "NO_NAME"));
+            } else {
+                object = new MessObj(message.getEditText().getText().toString(),
+                        mAuth.getCurrentUser().getEmail(),
+                        questionId,
+                        mAuth.getCurrentUser().getDisplayName());
+            }
+
             messages = adapter.getMessages();
             messages.add(0, object);
             adapter.setMessages(messages);
@@ -117,6 +128,7 @@ public class ChatScreen extends AppCompatActivity {
                             }
                         }
                     });
+            message.getEditText().setText("");
         }
     }
 
@@ -166,6 +178,7 @@ public class ChatScreen extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
+                                                        imageUri = null;
                                                         Toast.makeText(ChatScreen.this, "Message Posted", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }

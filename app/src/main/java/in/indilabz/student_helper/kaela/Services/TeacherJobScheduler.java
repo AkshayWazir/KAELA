@@ -37,31 +37,33 @@ public class TeacherJobScheduler extends JobService {
     }
 
     private void checkForChanges(final JobParameters jobParameters) {
-        destination = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        FirebaseFirestore.getInstance()
-                .collection("EVENTS")
-                .document(destination)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Toast.makeText(TeacherJobScheduler.this, "Error Occured", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (documentSnapshot.exists()) {
-                            boolean bool = documentSnapshot.getBoolean("NOTIFY");
-                            if (bool) {
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("NOTIFY", false);
-                                showNotification();
-                                FirebaseFirestore.getInstance()
-                                        .collection("EVENTS")
-                                        .document(destination)
-                                        .set(map);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            destination = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            FirebaseFirestore.getInstance()
+                    .collection("EVENTS")
+                    .document(destination)
+                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                Toast.makeText(TeacherJobScheduler.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (documentSnapshot.exists()) {
+                                boolean bool = documentSnapshot.getBoolean("NOTIFY");
+                                if (bool) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("NOTIFY", false);
+                                    showNotification();
+                                    FirebaseFirestore.getInstance()
+                                            .collection("EVENTS")
+                                            .document(destination)
+                                            .set(map);
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
 
     }
 

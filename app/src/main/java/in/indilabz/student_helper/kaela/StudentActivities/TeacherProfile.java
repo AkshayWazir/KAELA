@@ -166,9 +166,6 @@ public class TeacherProfile extends AppCompatActivity {
     }
 
     void submitReview(final String review) {
-        for (int i = 0; i < 1; i++) {
-            System.out.println(i);
-        }
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.SUBMIT_REVIEW,
                 new Response.Listener<String>() {
                     @Override

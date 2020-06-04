@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="in.indilabz.student_helper.kaela.IntroFragments.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,8 @@
             android:id="@+id/cardView13"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/color3"
             android:fadingEdgeLength="5sp"
@@ -22,8 +23,7 @@
             app:cardElevation="7sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-            app:layout_constraintTop_toBottomOf="@id/progressBar2">
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout2">
 
             <TextView
                 android:id="@+id/textView4"
@@ -34,12 +34,12 @@
                 android:fontFamily="@font/cabin_medium"
                 android:text="LOGIN"
                 android:textColor="@color/color4"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView5"
-            android:padding="4sp"
+            android:padding="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -122,8 +122,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView12"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/color5"

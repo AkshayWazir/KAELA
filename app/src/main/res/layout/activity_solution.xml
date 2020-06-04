@@ -134,9 +134,9 @@
             android:id="@+id/textView80"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
+            android:layout_margin="8dp"
             android:text="Discuss"
             android:textColor="@color/color3"
-            android:textSize="18sp" />
+            android:textSize="18dp" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

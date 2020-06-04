@@ -33,6 +33,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/color3"
             android:hint="Review" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +60,7 @@
             android:fontFamily="sans-serif"
             android:text="SUBMIT"
             android:textColor="@color/color4"
-            android:textSize="18sp" />
+            android:textSize="18dp" />
     </androidx.cardview.widget.CardView>
 
     <ProgressBar

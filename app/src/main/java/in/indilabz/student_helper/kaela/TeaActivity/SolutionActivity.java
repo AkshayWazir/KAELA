@@ -57,6 +57,7 @@ public class SolutionActivity extends AppCompatActivity implements acceptSol {
     ProgressBar bar;
     Bitmap decodedByte;
     AlertDialog alertDialog;
+    StringRequest stringRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class SolutionActivity extends AppCompatActivity implements acceptSol {
     }
 
     void setupQuestiom(final String ques) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.GET_SOLS,
+        stringRequest = new StringRequest(Request.Method.POST, PublicLinks.GET_SOLS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -174,6 +175,7 @@ public class SolutionActivity extends AppCompatActivity implements acceptSol {
                         } else if (error instanceof ParseError) {
                             Toast.makeText(getApplicationContext(), "Parse Error", Toast.LENGTH_LONG).show();
                         }
+                        requestAgain();
                     }
                 }) {
             @Override
@@ -183,6 +185,10 @@ public class SolutionActivity extends AppCompatActivity implements acceptSol {
                 return params;
             }
         };
+        requestAgain();
+    }
+
+    void requestAgain() {
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
@@ -253,6 +259,7 @@ public class SolutionActivity extends AppCompatActivity implements acceptSol {
                         Toast.makeText(SolutionActivity.this, "UPDATED", Toast.LENGTH_SHORT).show();
                     } else {
                         alertDialog.dismiss();
+                        requestAgain();
                         Toast.makeText(SolutionActivity.this, "Failed To upload", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {

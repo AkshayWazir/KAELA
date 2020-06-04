@@ -98,9 +98,9 @@ public class ChatScreen extends AppCompatActivity {
             message.getEditText().setText("");
         } else {
             SharedPreferences preferences = getSharedPreferences("USER", MODE_PRIVATE);
-            String stu = preferences.getString("TYPE", "0");
+            int stu = preferences.getInt("TYPE", 0);
             MessObj object;
-            if (stu.equals("0")) {
+            if (stu  == 0) {
                 object = new MessObj(message.getEditText().getText().toString(),
                         mAuth.getCurrentUser().getEmail(),
                         questionId,

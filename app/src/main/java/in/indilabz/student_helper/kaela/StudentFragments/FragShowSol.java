@@ -86,7 +86,7 @@ public class FragShowSol extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Try Again : " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Try Again : " + error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

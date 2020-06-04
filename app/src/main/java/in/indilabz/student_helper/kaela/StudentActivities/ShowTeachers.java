@@ -17,25 +17,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.indilabz.student_helper.kaela.Adapters.TeacherAdapter;
 import in.indilabz.student_helper.kaela.Interfaces.AskQuestion;
+import in.indilabz.student_helper.kaela.LoadingDialogBuilder;
 import in.indilabz.student_helper.kaela.ModelObjects.TeacherObject;
 import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
@@ -47,7 +43,8 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     ArrayList<String> teacherMail;
     CardView submit_btn;
     TeacherAdapter adapter;
-    ProgressBar bar;
+    StringRequest stringRequest;
+    LoadingDialogBuilder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +56,9 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
 
         recyclerView = findViewById(R.id.teacher_rcview);
         submit_btn = findViewById(R.id.button3);
-        bar = findViewById(R.id.progressBar4);
 
+        builder = new LoadingDialogBuilder(this);
+        builder.dialogRaise();
         adapter = new TeacherAdapter(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         getTeachers(subId);
@@ -82,7 +80,7 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
     }
 
     void getTeachers(final String subid) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PublicLinks.FETCH_TEACHERS,
+        stringRequest = new StringRequest(Request.Method.POST, PublicLinks.FETCH_TEACHERS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -96,10 +94,12 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                                     JSONObject obj = object.getJSONArray("dat").getJSONObject(i);
                                     objects.add(new TeacherObject("", obj.getString("name"), obj.getString("exp"), obj.getString("connections"), obj.getString("tea_id"), obj.getString("mail")));
                                 }
-                                bar.setVisibility(View.GONE);
+                                builder.dialogDismiss();
                                 adapter.setObjects(objects);
                             } else {
                                 Toast.makeText(getApplicationContext(), "No Data Available", Toast.LENGTH_SHORT).show();
+                                builder.dialogDismiss();
+                                finish();
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -110,42 +110,9 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), "Try Again :" + error.getMessage(), Toast.LENGTH_LONG).show();
-                        finish();
+                        makeRequest();
                     }
                 }) {
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                try {
-                    Cache.Entry cacheEntry = HttpHeaderParser.parseCacheHeaders(response);
-                    if (cacheEntry == null) {
-                        cacheEntry = new Cache.Entry();
-                    }
-                    final long cacheHitButRefreshed = 3 * 60 * 1000; // in 3 minutes cache will be hit, but also refreshed on background
-                    final long cacheExpired = 24 * 60 * 60 * 1000; // in 24 hours this cache entry expires completely
-                    long now = System.currentTimeMillis();
-                    final long softExpire = now + cacheHitButRefreshed;
-                    final long ttl = now + cacheExpired;
-                    cacheEntry.data = response.data;
-                    cacheEntry.softTtl = softExpire;
-                    cacheEntry.ttl = ttl;
-                    String headerValue;
-                    headerValue = response.headers.get("Date");
-                    if (headerValue != null) {
-                        cacheEntry.serverDate = HttpHeaderParser.parseDateAsEpoch(headerValue);
-                    }
-                    headerValue = response.headers.get("Last-Modified");
-                    if (headerValue != null) {
-                        cacheEntry.lastModified = HttpHeaderParser.parseDateAsEpoch(headerValue);
-                    }
-                    cacheEntry.responseHeaders = response.headers;
-                    final String jsonString = new String(response.data,
-                            HttpHeaderParser.parseCharset(response.headers));
-                    return Response.success(jsonString, cacheEntry);
-                } catch (UnsupportedEncodingException e) {
-                    return Response.error(new ParseError(e));
-                }
-            }
-
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -153,6 +120,10 @@ public class ShowTeachers extends AppCompatActivity implements AskQuestion {
                 return params;
             }
         };
+        makeRequest();
+    }
+
+    void makeRequest() {
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 

@@ -43,6 +43,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.indilabz.student_helper.kaela.Adapters.StudentReviewAdapter;
+import in.indilabz.student_helper.kaela.LoadingDialogBuilder;
 import in.indilabz.student_helper.kaela.ModelObjects.ReviewObject;
 import in.indilabz.student_helper.kaela.Networking.MySingleton;
 import in.indilabz.student_helper.kaela.PublicLinks;
@@ -59,6 +60,8 @@ public class TeacherProfile extends AppCompatActivity {
     Bitmap bitmap;
     ImageView upload_image;
     StudentReviewAdapter adapter;
+    LoadingDialogBuilder builder;
+    StringRequest proUpRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class TeacherProfile extends AppCompatActivity {
         upload_image = findViewById(R.id.imageView2);
         Intent intent = getIntent();
         SharedPreferences prefs = this.getSharedPreferences("USER", MODE_PRIVATE);
+        builder = new LoadingDialogBuilder(this);
+        builder.dialogRaise();
 
         // section to check Who's calling
         int teaOrStu = prefs.getInt("TYPE", 0);
@@ -143,6 +148,7 @@ public class TeacherProfile extends AppCompatActivity {
                                 objects.add(new ReviewObject(obj.getString("stu_name"), obj.getString("review"), obj.getString("school")));
                             }
                             adapter.setObjects(objects);
+                            builder.dialogDismiss();
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -152,6 +158,7 @@ public class TeacherProfile extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_LONG).show();
+                        builder.dialogDismiss();
                     }
                 }) {
             @Override
@@ -161,8 +168,11 @@ public class TeacherProfile extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
+        reRequest(stringRequest);
+    }
+
+    void reRequest(StringRequest request) {
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
     void submitReview(final String review) {
@@ -199,8 +209,7 @@ public class TeacherProfile extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
+        reRequest(stringRequest);
     }
 
     public void fetchPropic(View view) {
@@ -221,7 +230,8 @@ public class TeacherProfile extends AppCompatActivity {
     }
 
     void startImageUpload() {
-        StringRequest request = new StringRequest(Request.Method.POST, PublicLinks.UPDATE_PROPIC_TEACHER, new Response.Listener<String>() {
+        builder.dialogRaise();
+        proUpRequest = new StringRequest(Request.Method.POST, PublicLinks.UPDATE_PROPIC_TEACHER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -229,20 +239,23 @@ public class TeacherProfile extends AppCompatActivity {
                     String response1 = object.getString("RESPONSE");
                     if (response1.equals("1")) {
                         Toast.makeText(TeacherProfile.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                        finish();
+                        builder.dialogDismiss();
                     } else {
                         alertDialog.dismiss();
                         Toast.makeText(TeacherProfile.this, "Failed To upload", Toast.LENGTH_SHORT).show();
+                        builder.dialogDismiss();
                     }
                 } catch (JSONException e) {
                     alertDialog.dismiss();
+                    builder.dialogDismiss();
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                alertDialog.dismiss();
+                builder.dialogDismiss();
+                reRequest(proUpRequest);
             }
         }) {
             @Override
@@ -254,7 +267,7 @@ public class TeacherProfile extends AppCompatActivity {
                 return params;
             }
         };
-        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        reRequest(proUpRequest);
     }
 
     @Override
